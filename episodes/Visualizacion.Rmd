@@ -1,5 +1,5 @@
 ---
-title: "Introduccion a la visualizacion de datos en R con ggplot2."
+title: "Introduction to Data Visualization in R with ggplot2."
 authors: [""]
 date: '2024-07-31'
 output:
@@ -19,138 +19,93 @@ editor_options:
 
 ::: questions
 
-- ¿Cómo visualizar datos epidemiologicos con ggplot2?
+- How to visualize epidemiological data with ggplot2?
 
 :::
 
 ::: objectives
 
-Al final de este taller usted podrá:
+At the end of this workshop you will be able to:
 
-- Reconocer las funciones que componen el paquete ggplot2.
-- Realizar gráficos básicos con la estructura de ggplot2
+- Recognize the functions that make up the ggplot2 package.
+- Create basic graphs with the ggplot2 structure.
 
 :::
 
 ::: prereq
-Esta unidad tiene como prerequisitos:
+This unit has the following prerequisites:
 
--   Introducción a R y RStudio
+-   Introduction to R and RStudio
 :::
 
 
 ::: checklist
-### Tabla de contenido
+### Table of Contents
 
--   Módulo: Ciencia de datos en salud pública
-    -   Unidad: Introducción a la visualización de datos en R con ggplot2
-        -   Tema 1: Principios de la gramática de gráficos con `ggplot2`
-        -   Tema 2: Gramática de gráficos
-            -   Datos (Data)
-            -   Estética (Aesthetics)
-            -   Geometría (Geometry)
-            -   Escala (Scale)
-            -   Facetas (Facets)
-            -   Temas (Themes)
+-   Module: Data Science in Public Health
+    -   Unit: Introduction to Data Visualization in R with ggplot2
+        -   Topic 1: Principles of the Grammar of Graphics with `ggplot2`
+        -   Topic 2: Grammar of Graphics
+            -   Data
+            -   Aesthetics
+            -   Geometry
+            -   Scale
+            -   Facets
+            -   Themes
             
 :::
 
-**Desarrollo del contenido** (desarrolle cada uno de los temas teniendo
-en cuenta la tabla de contenido)
+**Content Development** (develop each of the topics considering the table of contents)
 
-## Introducción
+## Introduction
 
-En el ámbito de la ciencia de datos y la toma de decisiones, la
-habilidad para transformar datos en información comprensible y que
-genere impacto es esencial. Esta unidad brindará una introducción a las
-herramientas necesarias para convertir conjuntos de datos en gráficos.
-En esta unidad haremos uso de ggplot2, una poderosa librería de gráficos
-de R basada en la gramática de gráficos, para crear visualizaciones
-impactantes.
+In the field of data science and decision-making, the ability to transform data into understandable and impactful information is essential. This unit will provide an introduction to the tools needed to turn datasets into graphs. In this unit, we will use ggplot2, a powerful R graphics library based on the grammar of graphics, to create impactful visualizations.
 
-## Tema 1: Principios de la gramática de gráficos con `ggplot2`
+## Topic 1: Principles of the Grammar of Graphics with `ggplot2`
 
-`ggplot2` es un paquete de R basado en la gramática de gráficos que
-permite visualizar datos de una manera consistente y estructurada.
+`ggplot2` is an R package based on the grammar of graphics that allows visualizing data in a consistent and structured way.
 
-`ggplot2`recibe su nombre precisamente de la abreviación del término
-gramática de gráficos (gg). La gramática de gráficos se refiere a un
-enfoque conceptual propuesto y desarrollado por Leland Wilkinson para la
-creación de gráficos, el cual sirvió como base para el desarrollo de
-`ggplot2` a manos de Hadley Wickham.
+`ggplot2` gets its name from the abbreviation of the term grammar of graphics (gg). The grammar of graphics refers to a conceptual approach proposed and developed by Leland Wilkinson for creating graphics, which served as the basis for the development of `ggplot2` by Hadley Wickham.
 
-La gramática de gráficos proporciona un marco conceptual para pensar
-sobre cómo construir y entender visualizaciones de datos de una manera
-coherente y estructurada. En términos simples, la gramática de gráficos
-descompone un gráfico en sus componentes fundamentales y define cómo se
-combinan estos componentes para representar datos.
+The grammar of graphics provides a conceptual framework for thinking about how to construct and understand data visualizations in a coherent and structured way. In simple terms, the grammar of graphics breaks down a graph into its fundamental components and defines how these components combine to represent data.
 
 ::: checklist
-### Estos componentes básicos son:
+### These basic components are:
 
-**1. Datos (Data):** representan los datos que queremos visualizar.
-Puede ser una tabla de datos (data.frame) en R u otra fuente de datos.
+**1. Data:** represents the data we want to visualize. It can be a data table (data.frame) in R or another data source.
 
-**2. Estética (Aesthetics):** definen cómo se mapean los atributos de
-los datos a propiedades visuales del gráfico, como posición en el eje X
-(x), posición en el eje Y (y), color, forma, tamaño, etc. Esto se
-especifica mediante la función `aes()` en `ggplot2`.
+**2. Aesthetics:** define how the attributes of the data are mapped to visual properties of the graph, such as position on the X-axis (x), position on the Y-axis (y), color, shape, size, etc. This is specified using the `aes()` function in `ggplot2`.
 
-**3. Geometría (Geometry):** representa la forma en que los datos se
-visualizan en el gráfico, como puntos, líneas, barras, áreas, etc. Cada
-tipo de gráfico tiene su función correspondiente en`ggplot2`, como
-geom_point() para un gráfico de dispersión o geom_bar() para un gráfico
-de barras.
+**3. Geometry:** represents the way the data is visualized in the graph, such as points, lines, bars, areas, etc. Each type of graph has its corresponding function in `ggplot2`, such as `geom_point()` for a scatter plot or `geom_bar()` for a bar chart.
 
-**4. Escala (Scale):** define cómo se mapean los valores de los datos a
-los valores visuales, como el rango de colores o el rango de los ejes.
-`ggplot2`ajusta automáticamente las escalas, pero también podemos
-`ggplot2`ajusta automáticamente las escalas, pero también podemos
-personalizarlas con funciones como `scale_log10()`,
-`scale_x_continuous()` o `scale_color_manual()`.
+**4. Scale:** defines how the data values are mapped to visual values, such as the range of colors or the range of the axes. `ggplot2` automatically adjusts the scales, but we can also customize them with functions like `scale_log10()`, `scale_x_continuous()`, or `scale_color_manual()`.
 
-**5. Facetas (Facets):** permiten dividir los datos en subconjuntos y
-mostrarlos en paneles múltiples (facetas) según ciertas variables.
-Podemos usar facet_wrap() o `facet_grid()` en `ggplot2`para implementar
-Podemos usar facet_wrap() o `facet_grid()` en `ggplot2`para implementar
-esta funcionalidad.
+**5. Facets:** allow dividing the data into subsets and displaying them in multiple panels (facets) according to certain variables. We can use `facet_wrap()` or `facet_grid()` in `ggplot2` to implement this functionality.
 
-**6. Temas (Themes):** controlan la apariencia visual general del
-gráfico, como títulos, etiquetas de ejes, fondos, etc. Podemos gráfico,
-como títulos, etiquetas de ejes, fondos, etc. Podemos personalizar el
-tema con la función `theme()` en `ggplot2`.
+**6. Themes:** control the overall visual appearance of the graph, such as titles, axis labels, backgrounds, etc. We can customize the theme with the `theme()` function in `ggplot2`.
 
-Por ejemplo, una estructura clásica de un gráfico de puntos será:
+For example, a classic structure of a scatter plot would be:
 
 ```         
-ggplot(data, \# Los datos
+ggplot(data, # The data
 
-   aes(x, y) \# La estética
+   aes(x, y) # The aesthetics
 )+
-   geom_point() \# la geometría
+   geom_point() # the geometry
 ```
 :::
 
-## Tema 2: Ejemplos del uso de la gramática de gráficos con ggplot
+## Topic 2: Examples of Using the Grammar of Graphics with ggplot
 
-Aquí vamos a ir explicando cómo puedes hacer uso de esta herramienta en
-tu computador. A medida que avanzas trata de ir replicando los
-ejercicios.
+Here we will explain how you can use this tool on your computer. As you progress, try to replicate the exercises.
 
 ::: callout
-#### **NOTA.**
+#### **NOTE.**
 
-Para hacer más versátil su uso, se recomienda conocer el funcionamiento
-del paquete dplyr y el uso de tuberías (pipes `%>%`), puedes repasar
-estos temas en la Unidad 1 de este módulo "Introducción a R y RStudio".
-Por su parte, `ggplot2` está contenido dentro de la librería Tidyverse.
-Además, Tidiverse incluye otras librerías como dplyr que, a su vez,
-incluye las pipes (`%>%`). Para más detalles sobre Tidyverse consulta la
-unidad de "Introducción a R y RStudio".
+To make its use more versatile, it is recommended to understand the functionality of the dplyr package and the use of pipes (`%>%`). You can review these topics in Unit 1 of this module "Introduction to R and RStudio". `ggplot2` is contained within the Tidyverse library. Additionally, Tidyverse includes other libraries such as dplyr, which in turn includes pipes (`%>%`). For more details on Tidyverse, see the unit "Introduction to R and RStudio".
 :::
 
-Para los ejercicios prácticos de esta unidad es necesario cargar las
-siguientes librerías:
+For the practical exercises in this unit, it is necessary to load the following libraries:
 
 ```{r}
 library(ggplot2) 
@@ -160,67 +115,36 @@ library(ggplot2)
 library(tidyverse)
 ```
 
-Ahora, veremos cada uno de los componentes para realizar gráficos de
-datos con `ggplot2` a través de un ejercicio práctico. Se requiere una
-tabla de datos (una estructura con filas y columnas) para poder ser
-usada en la estética de los gráficos. Previo al uso de `ggplot2`, suele
-ser necesario realizar un proceso de limpieza y organización de los
-datos. Para este ejercicio práctico usaremos una base de datos limpia,
-que nos permita hacer las visualizaciones sin la necesidad de
-pre-procesar los datos.
+Now, we will see each of the components to create data graphs with `ggplot2` through a practical exercise. A data table (a structure with rows and columns) is required to be used in the aesthetics of the graphs. Prior to using `ggplot2`, it is often necessary to perform a data cleaning and organization process. For this practical exercise, we will use a clean dataset that allows us to create visualizations without the need for pre-processing the data.
 
 ::: callout
-La tabla de datos para este ejercicio puedes encontrarla en:
+The data table for this exercise can be found at:
 <https://github.com/TRACE-LAC/TRACE-LAC-data/blob/main/otros/muestra_covid.RDS?raw=true>
 :::
 
-Cuando ya tengas los datos descargados en tu computador y en la carpeta
-de data de tu proyecto puedes ejecutar el siguiente comando:
+Once you have downloaded the data to your computer and placed it in the data folder of your project, you can execute the following command:
 
 ```{r}
 covid19 <- readRDS("data/muestra_covid.RDS")
 ```
 
-Una vez obtenida la tabla de datos vamos a explorar los datos para
-conocer el estado actual y revisar qué variables podríamos usar para las
-visualizaciones. Para esto utilizamos una de las funciones vistas en la
-unidad de "Introducción a R y RStudio" llamada `glimpse.`Úsala y
-verifica la estructura de la tabla de datos
+Once the data table is obtained, we will explore the data to understand its current state and review which variables we could use for visualizations. For this, we use one of the functions seen in the unit "Introduction to R and RStudio" called `glimpse`. Use it and check the structure of the data table
 
 ```{r}
 glimpse(covid19)
 ```
 
-### Estética (Aesthetics)
+### Aesthetics
 
-En el contexto de la gramática de gráficos, la estética (aesthetics) se
-refiere a cómo mapeamos los atributos de nuestros datos a propiedades
-visuales en el gráfico. Estas propiedades visuales pueden ser elementos
-tales como la posición en el eje X (x), la posición en el eje Y (y), el
-color (color), la forma(shape), el tamaño(size), etc. Al mapear estos
-atributos podemos crear visualizaciones que nos permiten comprender y
-comunicar patrones y relaciones en los datos de manera efectiva.
+In the context of the grammar of graphics, aesthetics refer to how we map the attributes of our data to visual properties in the graph. These visual properties can be elements such as position on the X-axis (x), position on the Y-axis (y), color, shape, size, etc. By mapping these attributes, we can create visualizations that allow us to understand and communicate patterns and relationships in the data effectively.
 
-En `ggplot2` la función principal para especificar la estética es
-`aes()`. A continuación algunos ejemplos para ilustrar cómo usar la
-estética en `ggplot2`.
+In `ggplot2`, the main function for specifying aesthetics is `aes()`. Below are some examples to illustrate how to use aesthetics in `ggplot2`.
 
-#### Ejemplo 1: Gráfico de dispersión (scatter plot)
+#### Example 1: Scatter Plot
 
-Supongamos que tenemos una tabla que cuenta con las variables x e y*.*
-Queremos crear un gráfico de dispersión donde la variable x se mapea en
-el eje X y la variable y en el eje Y. Además, queremos que los puntos se
-coloreen según la variable grupo. Mediante la función `aes()` de
-`ggplot2` es posible asignar estas variables a los correspondientes
-atributos visuales del gráfico, como veremos en el ejemplo a
-continuación.
+Suppose we have a table with the variables x and y. We want to create a scatter plot where the x variable is mapped to the X-axis and the y variable to the Y-axis. Additionally, we want the points to be colored according to the group variable. Using the `aes()` function in `ggplot2`, it is possible to assign these variables to the corresponding visual attributes of the graph, as shown in the following example.
 
-Consideremos la base covid19 que cargamos previamente. El requerimiento
-es realizar un gráfico de dispersión que muestre el número de casos por
-fecha de reporte y desagregados por sexo. Para esto, primero organizamos
-los datos para lograr una tabla resumen con la información que queremos
-graficar, usando las funciones vistas en la unidad de "Introducción a R
-y RStudio" de la siguiente manera:
+Consider the covid19 dataset we loaded earlier. The requirement is to create a scatter plot showing the number of cases by report date and disaggregated by sex. For this, we first organize the data to create a summary table with the information we want to graph, using the functions seen in the unit "Introduction to R and RStudio" as follows:
 
 ```{r}
 covid19_resumen <- covid19 %>%
@@ -228,12 +152,7 @@ covid19_resumen <- covid19 %>%
   summarise(casos = n())
 ```
 
-Luego, podemos usar la estética de los gráficos de `ggplot2` indicando
-las variables a usar en cada dimensión, en este caso en el eje X
-tendremos la variable de tiempo (fecha_reporte_web) y en el eje Y el
-número de casos (casos). Para ver la desagregación por sexo haremos uso
-de uno de los atributos como el color. Estas instrucciones pueden
-seguirse a través del siguiente código:
+Then, we can use the aesthetics of the `ggplot2` graphs by specifying the variables to use in each dimension. In this case, on the X-axis, we will have the time variable (fecha_reporte_web), and on the Y-axis, the number of cases (casos). To see the disaggregation by sex, we will use one of the attributes such as color. These instructions can be followed with the following code:
 
 ```{r eval = FALSE}
 ggplot(data = covid19_resumen,
@@ -241,7 +160,7 @@ ggplot(data = covid19_resumen,
   geom_point()
 ```
 
-La visualización que generamos es la siguiente:
+The visualization we generate is as follows:
 
 ```{r echo = FALSE}
 ggplot(data = covid19_resumen,
@@ -249,28 +168,20 @@ ggplot(data = covid19_resumen,
   geom_point()
 ```
 
-### Geometría (Geometry)
+### Geometry
 
-La geometría representa la forma en que los datos se visualizan en el
-gráfico; como puntos, líneas, barras, áreas, etc. Cada tipo de gráfico
-tiene su función correspondiente en `ggplot2`; por ejemplo
-`geom_point()` para un gráfico de dispersión o `geom_bar()` para un
-gráfico de barras.
+Geometry represents the way the data is visualized in the graph, such as points, lines, bars, areas, etc. Each type of graph has its corresponding function in `ggplot2`, such as `geom_point()` for a scatter plot or `geom_bar()` for a bar chart.
 
 ::: checklist
-En la siguiente tabla se muestran algunos ejemplos de los distintos
-tipos de geometrías más usados en `ggplot2` con su correspondiente
-comando:
+In the following table, some examples of the different types of geometries most commonly used in `ggplot2` with their corresponding commands are shown:
 
 ![](fig/tipogeom.png)
 
 :::
 
-#### Ejemplo 2: Gráfico de líneas
+#### Example 2: Line Chart
 
-Supongamos que queremos visualizar la evolución del número de casos de
-covid-19 a lo largo del tiempo. Para esto, primero debemos preparar el
-conjunto de datos que formarán el gráfico:
+Suppose we want to visualize the evolution of the number of covid-19 cases over time. For this, we first need to prepare the dataset that will form the graph:
 
 ```{r}
 covid19_fecha <- covid19 %>%
@@ -278,8 +189,7 @@ covid19_fecha <- covid19 %>%
   summarise(casos = n())
 ```
 
-Una vez el conjunto de datos esté listo, procedemos a usar la geometría
-de `ggplot2`:
+Once the dataset is ready, we proceed to use the geometry of `ggplot2`:
 
 ```{r eval = FALSE}
 ggplot(data = covid19_fecha, 
@@ -287,7 +197,7 @@ ggplot(data = covid19_fecha,
   geom_line()
 ```
 
-Y obtenemos el siguiente gráfico:
+And we get the following graph:
 
 ```{r echo = FALSE}
 ggplot(data = covid19_fecha, 
@@ -295,24 +205,20 @@ ggplot(data = covid19_fecha,
   geom_line()
 ```
 
-#### Ejemplo 3: Gráfico de barras
+#### Example 3: Bar Chart
 
-Ahora, hagamos una visualización en forma de gráfico de barras del total
-de casos positivos por sexo, para esto utilizamos el comando
-`geom_bar()` así:
+Now, let's create a bar chart visualization of the total positive cases by sex. For this, we use the `geom_bar()` command as follows:
 
 ```{r}
 ggplot(data = covid19) +
   geom_bar(aes(x = sexo))
 ```
 
-En este ejemplo podemos observar que `ggplot2` automáticamente calcula
-el eje Y.
+In this example, we can see that `ggplot2` automatically calculates the Y-axis.
 
-#### Ejemplo 4. Gráfico de barras más complejo
+#### Example 4. More Complex Bar Chart
 
-Primero vamos a preparar los datos en una tabla de datos que permita
-contar el número de casos por ubicación del caso:
+First, we will prepare the data in a table that allows counting the number of cases by case location:
 
 ```{r}
 covid19_ubicacion <- covid19 %>%  
@@ -320,25 +226,21 @@ group_by(ubicacion_del_caso) %>%
   summarise(casos = n())
 ```
 
-Ahora, por medio de la geometría de `ggplot`, hacemos la visualización
-usando el argumento `stat = "identity"` que calcula la suma de la
-variable `y = casos` agrupando por la variable `x = ubicacion_del_caso`:
+Now, using the geometry of `ggplot`, we create the visualization using the `stat = "identity"` argument, which calculates the sum of the `y = casos` variable grouped by the `x = ubicacion_del_caso` variable:
 
 ```{r eval=FALSE}
 ggplot(data = covid19_ubicacion, aes(x = ubicacion_del_caso, y = casos)) + 
   geom_bar(stat = "identity")
 ```
 
-Se obtendrá la siguiente gráfica:
+We will get the following graph:
 
 ```{r echo = FALSE}
 ggplot(data = covid19_ubicacion, aes(x = ubicacion_del_caso, y = casos)) + 
   geom_bar(stat = "identity")
 ```
 
-En este caso tenemos las barras en orientación vertical. Si desearamos
-poner las barras en orientación horizontal podemos lograrlo, usando al
-final el comando `coord_flip` de la siguiente manera:
+In this case, we have the bars in a vertical orientation. If we want to place the bars in a horizontal orientation, we can achieve this by using the `coord_flip` command at the end as follows:
 
 ```{r eval=FALSE}
 ggplot(data = covid19_ubicacion, aes(x = ubicacion_del_caso, y = casos)) +
@@ -346,7 +248,7 @@ ggplot(data = covid19_ubicacion, aes(x = ubicacion_del_caso, y = casos)) +
   coord_flip()
 ```
 
-Obteniendo como resultado:
+Resulting in:
 
 ```{r echo=FALSE}
 ggplot(data = covid19_ubicacion, aes(x = ubicacion_del_caso, y = casos)) +
@@ -354,13 +256,7 @@ ggplot(data = covid19_ubicacion, aes(x = ubicacion_del_caso, y = casos)) +
   coord_flip()
 ```
 
-Si queremos ordenar la ubicación del caso por el número de casos,
-podemos utilizar el comando `reorder` en el eje donde está la ubicación
-del caso. La función `reorder` tiene dos argumentos: el primero es la
-variable a ordenar y el segundo es la variable que otorga el orden. En
-este caso sería `reorder(ubicacion_del_caso, +casos)` si queremos
-ordenar de mayor a menor cantidad de casos. El código sería el
-siguiente:
+If we want to order the case location by the number of cases, we can use the `reorder` command on the axis where the case location is. The `reorder` function has two arguments: the first is the variable to be ordered, and the second is the variable that provides the order. In this case, it would be `reorder(ubicacion_del_caso, +casos)` if we want to order from highest to lowest number of cases. The code would be as follows:
 
 ```{r eval = FALSE}
 ggplot(covid19_ubicacion, 
@@ -369,7 +265,7 @@ ggplot(covid19_ubicacion,
   coord_flip()
 ```
 
-Y la gráfica queda así:
+And the graph looks like this:
 
 ```{r echo = FALSE}
 ggplot(covid19_ubicacion, 
@@ -379,77 +275,63 @@ ggplot(covid19_ubicacion,
 ```
 
 ::: challenge
-Pregunta ¿cómo produciría esta misma gráfica, pero en orden ascendente?
+Question: How would you produce this same graph but in ascending order?
 :::
 
-### Escala
+### Scale
 
-En la gramática de gráficos en `ggplot2`, la escala se refiere a la
-forma en que los valores de los datos se traducen en propiedades
-visuales. La elección adecuada de las escalas es esencial para que los
-gráficos sean interpretables y precisos.
+In the grammar of graphics in `ggplot2`, the scale refers to how the data values are translated into visual properties. Choosing the appropriate scales is essential for making the graphs interpretable and accurate.
 
-A continuación, veremos algunos de los diferentes tipos de escalas
-disponibles en `ggplot2` y sus funciones:
+Below, we will see some of the different types of scales available in `ggplot2` and their functions:
 
 ::: checklist
-#### 1. Para **datos de tipo continuo o numéricos** tenemos **escalas continuas como:**
+#### 1. For **continuous or numerical data**, we have **continuous scales such as:**
 
--   `scale_x_continuous()` y `scale_y_continuous()` : para el eje x y el
-    eje y, respectivamente.
+-   `scale_x_continuous()` and `scale_y_continuous()`: for the x-axis and y-axis, respectively.
 
--   `scale_color_continuous()`: asigna colores a los valores continuos.
+-   `scale_color_continuous()`: assigns colors to continuous values.
 
--   `scale_size_continuous()`: asigna tamaño a los valores.
+-   `scale_size_continuous()`: assigns size to values.
 :::
 
 ::: checklist
-#### 2. Para **datos categóricos o de carácter** tenemos escalas discretas como:
+#### 2. For **categorical or character data**, we have discrete scales such as:
 
--   `scale_x_discrete()` y `scale_y_discrete()`: para el eje x y el eje
-    y, respectivamente.
+-   `scale_x_discrete()` and `scale_y_discrete()`: for the x-axis and y-axis, respectively.
 
--   `scale_color_discrete()`: asigna colores a los valores discretos.
+-   `scale_color_discrete()`: assigns colors to discrete values.
 
--   `scale_shape_discrete()`: asigna diferentes formas a los diferentes
-    valores discretos.
+-   `scale_shape_discrete()`: assigns different shapes to different discrete values.
 :::
 
 ::: checklist
-#### 3. Para **datos de fecha** tenemos escalas de fechas como:
+#### 3. For **date data**, we have date scales such as:
 
--   `scale_x_date()` y `scale_y_date()`: para el eje x y el eje y,
-    respectivamente cuando se tengan datos de fecha.
+-   `scale_x_date()` and `scale_y_date()`: for the x-axis and y-axis, respectively, when dealing with date data.
 :::
 
 ::: checklist
-#### 4. Para hacer uso de escalas personalizadas se hace uso de escalas manuales en las que podemos especificar nuestros propios valores.
+#### 4. To use custom scales, we use manual scales where we can specify our own values.
 
--   `scale_color_manual()`: se especifica manualmente los colores para
-    los valores.
+-   `scale_color_manual()`: manually specifies colors for values.
 
--   `scale_shape_manual()`: se especifica manualmente las formas para
-    los valores.
+-   `scale_shape_manual()`: manually specifies shapes for values.
 :::
 
 ::: checklist
-#### 5. Otras escalas:
+#### 5. Other scales:
 
--   `scale_fill_*`: se usa similar a las escalas de color pero para
-    colores que queramos con relleno.
+-   `scale_fill_*`: used similarly to color scales but for fill colors.
 
--   `scale_size_area()`: Asigna los valores al área en lugar del
-    diámetro, lo que puede ser útil para los puntos.
+-   `scale_size_area()`: assigns values to the area instead of the diameter, which can be useful for points.
 
--   `scale_linetype()`: para diferente tipos de línea
+-   `scale_linetype()`: for different line types
 
--   `scale_y_log10()`: para hacer uso de escala logarítmica en eje y.
+-   `scale_y_log10()`: to use a logarithmic scale on the y-axis.
 
--   `scale_colour_gradient()`: crea un degradé de color entre bajo y
-    alto o `scale_colour_gradient2()` en bajo, medio y alto.
+-   `scale_colour_gradient()`: creates a color gradient between low and high or `scale_colour_gradient2()` for low, medium, and high.
 
-A continuación, veremos algunos ejemplos de cómo usar la escala en
-`ggplot2`con el `data.frame` previamente cargada `covid19`.
+Below, we will see some examples of how to use scales in `ggplot2` with the previously loaded `covid19` data frame.
 :::
 
  <center>  
@@ -458,47 +340,39 @@ A continuación, veremos algunos ejemplos de cómo usar la escala en
   
 </center>
 
-#### Ejemplo 5. Gráfico con escala logarítmica
+#### Example 5. Graph with Logarithmic Scale
 
-Usaremos exactamente el mismo ejemplo anterior, pero en este caso al
-final agregamos la escala `logarítmica scale_y_log10()` así:
+We will use the same example as before, but in this case, we add the logarithmic scale `scale_y_log10()` at the end as follows:
 
 ```{r eval = FALSE}
 ggplot(covid19_ubicacion, 
        aes(x = reorder(ubicacion_del_caso, -casos), y = casos)) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  scale_y_log10(name = "Casos Confirmados (escala log)")
+  scale_y_log10(name = "Confirmed Cases (log scale)")
 ```
 
-De esta manera, el nuevo gráfico se vería así:
+In this way, the new graph would look like this:
 
 ```{r echo =FALSE}
 ggplot(covid19_ubicacion, 
        aes(x = reorder(ubicacion_del_caso, -casos), y = casos)) +
   geom_bar(stat = "identity") +
   coord_flip() +
-  scale_y_log10(name = "Casos Confirmados (escala log)")
+  scale_y_log10(name = "Confirmed Cases (log scale)")
 ```
 
 ::: discussion
-¿Qué diferencias ve con la última gráfica del Ejemplo 4.?
+What differences do you see with the last graph in Example 4?
 :::
 
-### Facetas
+### Facets
 
-Las Facetas (`Facets`) en la gramática de gráficos son una forma de
-dividir los datos en subconjuntos y representarlos en múltiples paneles
-dentro del mismo gráfico. Esto nos permite visualizar diferentes
-aspectos de los datos o comparar grupos de manera más efectiva. En
-`ggplot2`, podemos usar la función `facet_wrap()` o `facet_grid()` para
-implementar las facetas, dependiendo del número de variables a usar para
-la creación de los paneles.
+Facets in the grammar of graphics are a way to divide the data into subsets and represent them in multiple panels within the same graph. This allows us to visualize different aspects of the data or compare groups more effectively. In `ggplot2`, we can use the `facet_wrap()` or `facet_grid()` function to implement facets, depending on the number of variables to use for creating the panels.
 
-#### Ejemplo 5. Gráfico con facet wrap
+#### Example 5. Graph with Facet Wrap
 
-Primero vamos a preparar los datos en una tabla de datos que permita
-contar el número de casos por `edad` y `sexo`:
+First, we will prepare the data in a table that allows counting the number of cases by `age` and `sex`:
 
 ```{r}
 covid19_sexo <- covid19 %>%
@@ -506,8 +380,7 @@ covid19_sexo <- covid19 %>%
   summarise(casos = n())
 ```
 
-Usando los datos de `covid-19`, vamos a representar la variable `casos`
-por `edad` en dos paneles por `sexo` usando `facet_wrap` así:
+Using the `covid-19` data, we will represent the `cases` variable by `age` in two panels by `sex` using `facet_wrap` as follows:
 
 ```{r}
 ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
@@ -516,11 +389,9 @@ ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
 ```
 
 ::: challenge
-De acuerdo con lo aprendido anteriormente, piense cómo podría hacer que
-cada faceta quede de un color diferente, es decir, asignando color a la
-variable `sexo` ¿cómo cambiaría el código?
+Based on what you have learned earlier, think about how you could make each facet a different color, that is, assigning color to the `sex` variable. How would the code change?
 
-El gráfico que debe producir es el siguiente:
+The graph you should produce is as follows:
 
 ```{r echo = FALSE}
 ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
@@ -537,7 +408,7 @@ ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
 :::
 :::
 
-Agregando una escala de color degradé tenemos:
+Adding a color gradient scale, we have:
 
 ```{r}
 ggplot(covid19_sexo, aes(edad, casos)) + 
@@ -546,29 +417,21 @@ ggplot(covid19_sexo, aes(edad, casos)) +
   facet_wrap(~sexo)
 ```
 
-### Tema
+### Theme
 
-En la gramática de gráficos, el tema se refiere a la personalización de
-la apariencia visual general del gráfico; como los títulos, etiquetas de
-ejes, fondos, colores, tamaños de fuente, entre otros elementos. Con los
-temas, podemos mejorar la legibilidad y estética de los gráficos,
-asegurando que la información se comunique de manera efectiva y
-atractiva.
+In the grammar of graphics, the theme refers to the customization of the overall visual appearance of the graph, such as titles, axis labels, backgrounds, colors, font sizes, among other elements. With themes, we can improve the readability and aesthetics of the graphs, ensuring that the information is communicated effectively and attractively.
 
-En `ggplot2`, podemos aplicar un tema predeterminado utilizando la
-función `theme()`. A continuación, proporcionamos algunos ejemplos de
-cómo utilizar los temas en *`ggplot2`* con la base de datos covid19.
+In `ggplot2`, we can apply a predefined theme using the `theme()` function. Below are some examples of how to use themes in `ggplot2` with the covid19 dataset.
 
-Usando la misma gráfica del ejemplo anterior, comparemos dos temas:
-`theme_classic()` y `theme_dark()`.
+Using the same graph from the previous example, let's compare two themes: `theme_classic()` and `theme_dark()`.
 
 ::: discussion
-¿Qué diferencias encuentra?
+What differences do you find?
 :::
 
-#### Ejemplo 6. Usando theme classic
+#### Example 6. Using theme classic
 
-Para usar el tema clásico tenemos:
+To use the classic theme, we have:
 
 ```{r}
 ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
@@ -577,9 +440,9 @@ ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
   theme_classic()
 ```
 
-#### Ejemplo 7. Usando theme classic
+#### Example 7. Using theme dark
 
-Para este tema tendríamos lo siguiente:
+For this theme, we would have the following:
 
 ```{r}
 ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
@@ -589,18 +452,15 @@ ggplot(data = covid19_sexo, aes(x = edad, y = casos)) +
 ```
 
 ::: callout
-Para revisar la lista de `theme()` que tiene disponible `ggplot2`, puede
-consultarse en
+To review the list of `theme()` available in `ggplot2`, you can consult
 [https://ggplot2.tidyverse.org/reference/ggtheme.html](https://%60ggplot2%60.tidyverse.org/reference/ggtheme.html){.uri}
 :::
 
-Finalmente, veamos un ejemplo de cómo modificar los themes manualmente.
+Finally, let's see an example of how to manually modify themes.
 
-#### Ejemplo 8. Cambiando títulos, subtítulos y ejes
+#### Example 8. Changing Titles, Subtitles, and Axes
 
-Podemos usar comandos como `xlab`, `ylab` para cambiar los nombres de
-los ejes. Igualmente, comandos como title y subtitle de la siguiente
-forma:
+We can use commands like `xlab`, `ylab` to change the names of the axes. Similarly, commands like title and subtitle as follows:
 
 ```{r}
 ggplot(data = covid19_sexo, 
@@ -608,18 +468,18 @@ ggplot(data = covid19_sexo,
   geom_point() +
   facet_wrap(~sexo) +
   labs(
-    y = "Casos diarios", x = "Edad en años",
-    colour = "Sexo",
-    title = "Distribución de casos de COVID-19 por edad y sexo en Latinoamerica"
+    y = "Daily Cases", x = "Age in Years",
+    colour = "Sex",
+    title = "Distribution of COVID-19 Cases by Age and Sex in Latin America"
   )
 ```
 
 ::: keypoints
 
-Revise si al final de esta lección adquirió estas competencias:
+Check if at the end of this lesson you have acquired these skills:
 
--   Reconocer las funciones que componen el paquete ggplot2.
--   Realizar gráficos básicos con la estructura de ggplot2.
+- Recognize the functions that make up the ggplot2 package.
+- Create basic graphs with the ggplot2 structure.
 
 :::
 
@@ -630,14 +490,14 @@ Revise si al final de esta lección adquirió estas competencias:
   
 </center>
 
-### Contribuciones
+### Contributions
 
--   Zulma M. Cucunuba: Versión inicial
--   Geraldine Gomez: Edición
--   Andree Valle: Ediciones menores
--   Laura Gómez-Bermeo: Ediciones menores
--   José M. Velasco-España: Ediciones menores
+-   Zulma M. Cucunuba: Initial version
+-   Geraldine Gomez: Editing
+-   Andree Valle: Minor edits
+-   Laura Gómez-Bermeo: Minor edits
+-   José M. Velasco-España: Minor edits
 
-### Asuntos legales
+### Legal Issues
 
 **Copyright**: Zulma M. Cucunuba, 2023
