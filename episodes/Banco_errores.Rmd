@@ -1,5 +1,5 @@
 ---
-title: "Banco de preguntas y errores frecuentes"
+title: "Error Bank"
 date: '2024-10-21'
 output:
   html_document: 
@@ -20,421 +20,421 @@ exercises: 8
 
 ::: questions
 
-- ¿Tiene algunas dificultades con el código en R?
+- Do you have any difficulties with the code in R?
 
 :::
 
 ::: objectives
 
-- En este documento usted podrá encontrar algunas de las preguntas y errores frecuentes de la ejecución del código en R.
+- In this document you will find some of the frequently asked questions and errors when running code in R.
 
 :::
 
 
-## Banco de preguntas
+## Question Bank
 
-### [¿Cómo instalar un paquete o "librería" en R?]{#instr}
+### [How to install a package or "library" in R?]{#instr}
 
-Para instalar un paquete en R puede hacerlo a través de:
+To install a package in R, you can do it through:
 
--   Le recomendamos que lo haga a través de la función:
+-   We recommend that you do it through the function:
 
 ```{r eval = FALSE}
-install.packages("paquete")
+install.packages("package")
 ```
 
-Algunos paquetes que están en su fase de desarrollo pueden ser instalados desde la última versión en github u otras ubicaciones utilizando los paquetes remotes o pak.
+Some packages that are in their development phase can be installed from the latest version on GitHub or other locations using the remotes or pak packages.
 
--   Otra opción es usar la función require:
+-   Another option is to use the require function:
 
 ```{r eval = FALSE}
-if (!require("paquete")) {
-  install.packages("paquete")
+if (!require("package")) {
+  install.packages("package")
 }
 ```
 
-Esta opción es útil porque instala el paquete si no está previamente instalado. Se puede combinar con remotes o pak
+This option is useful because it installs the package if it is not already installed. It can be combined with remotes or pak.
 
--   Usar la interfaz de RStudio:
+-   Use the RStudio interface:
 
-    1.  Haga click en la ventana `Packages`
+    1.  Click on the `Packages` window.
 
-    2.  Presione el botón `Install`
+    2.  Press the `Install` button.
 
-    3.  Escriba el nombre del (de los) paquete(s) a instalar
+    3.  Type the name of the package(s) to install.
 
-    4.  Presione botón `Install`.
+    4.  Press the `Install` button.
 
-### [¿Cómo usar una función?]{#funcr}
+### [How to use a function?]{#funcr}
 
-          Si la función pertenece a un paquete de R, puede hacerse de dos formas:
+          If the function belongs to an R package, it can be done in two ways:
 
--   Llamar el nombre del paquete de R y poner dos veces dos puntos `(::)` y en seguida llamar el nombre de la función. Ahora debe diligenciar los argumentos
-
-```{r eval = FALSE}
-paquete::nombre_de_la_funcion(argumentos)
-```
-
--   Cargar el paquete de R con `library`:
+-   Call the name of the R package and put two colons `(::)` and then call the name of the function. Now you must fill in the arguments.
 
 ```{r eval = FALSE}
-library("paquete")
+package::function_name(arguments)
 ```
 
-y una vez cargada. Llamar el nombre de la función y diligenciar los argumentos
+-   Load the R package with `library`:
 
 ```{r eval = FALSE}
-nombre_de_la_funcion(argumentos)
+library("package")
 ```
 
-Es importante tener previamente el paquete instalado. Si tiene dudas vaya a [¿Cómo instalar un paquete en R?](instr)
-
--             Si la función fue creada por usted y se encuentra en el ambiente global:
-
-Simplemente llame la función por su nombre y proporcione los argumentos necesarios:
+and once loaded, call the function name and fill in the arguments.
 
 ```{r eval = FALSE}
-nombre_de_su_funcion(argumentos)
+function_name(arguments)
 ```
 
-### ¿Cómo cargar un paquete o "librería"?
+It is important to have the package installed beforehand. If you have any questions, go to [How to install a package in R?](instr)
 
-Algunas opciones para cargar un paquete son:
+-             If the function was created by you and is in the global environment:
 
--   La recomendada es utilizar la función library:
+Simply call the function by its name and provide the necessary arguments:
 
 ```{r eval = FALSE}
-library("paquete")
+your_function_name(arguments)
 ```
 
--   Utilizando la interfaz de RStudio:
+### How to load a package or "library"?
 
-    1.  Vaya a la sección derecha inferior a la pestaña `Packages`
+Some options to load a package are:
 
-    2.  De click en el cuadro frente a cada función, esto activará la función `library`.
-
-### ¿Si cargo las librerías debo cargarlas cada vez que vaya a usar la función?
-
-No, solo es necesario cargarlas una vez por sesión de R. Sin embargo, si cerro su RStudio o abrió un nuevo proyecto, cuenta como una nueva sesión y, por lo tanto, debe cargarlas de nuevo para poder trabajar.
-
-### ¿Puedo desactivar una librería que ya cargué sin reiniciar R?
-
-Si, es posible mediante dos opciones:
-
--   Utilice la función `detach`
+-   The recommended way is to use the library function:
 
 ```{r eval = FALSE}
-detach("package:paquete", unload = TRUE)
+library("package")
 ```
 
--   Utilizando la interfaz de RStudio:
+-   Using the RStudio interface:
 
-    1.  Vaya a la sección derecha inferior a la pestaña `Packages`
+    1.  Go to the lower right section to the `Packages` tab.
 
-    2.  De click en el cuadro frente a cada función (si el cuadro tiene un visto, el paquete está cargado; si el cuadro está vacío, el paquete no está cargado), esto activará la función `detach`. ***Advertencia*****: Si presiona el simbolo de x al lado del paquete lo desinstalará.**
+    2.  Click on the box in front of each function, this will activate the `library` function.
 
-### No veo el resultado de mi código
+### If I load the libraries, do I have to load them every time I want to use the function?
 
-Esto puede ocurrir por varios motivos:
+No, you only need to load them once per R session. However, if you close your RStudio or open a new project, it counts as a new session, so you need to load them again to work.
 
--   Si guardo el resultado usando el símbolo de asignación (ej. `nombre <- "Laura"`). Este aparecerá en el ambiente global (zona superior lateral derecha) y no se ejecutará en la consola a menos que se llame el objeto, es decir,
+### Can I deactivate a library that I have already loaded without restarting R?
 
-    1.  se ponga el nombre del objeto en la consola y se ejecute (presionando `Enter`)
+Yes, it is possible in two ways:
 
-    2.  o que en el script o Chunck de RMarkdown se presione `Control + Enter` en Windows o `Command + Enter` en Mac.
+-   Use the `detach` function.
 
--   Falta alguna librería necesaria. Revise que todas las librerías necesarias estén cargadas al inicio del script.
+```{r eval = FALSE}
+detach("package:package", unload = TRUE)
+```
 
--   Hay errores en el código. Verifique que no haya errores que impidan que el código se ejecute correctamente. Al ejecutar el código en la consola le aparecerán algunas alertas de errores que pueda tener el código.
+-   Using the RStudio interface:
 
--   El script no se ha ejecutado completamente. Asegúrese de ejecutar el script completo para que todas las líneas de código se ejecuten en el orden correcto.
+    1.  Go to the lower right section to the `Packages` tab.
 
--   El script no se ha ejecutado completamente. Asegúrese de ejecutar el script completo para que todas las líneas de código se ejecuten en el orden correcto.
+    2.  Click on the box in front of each function (if the box has a checkmark, the package is loaded; if the box is empty, the package is not loaded), this will activate the `detach` function. ***Warning*****: If you press the x symbol next to the package, it will uninstall it.**
 
-### Errores frecuentes al usar `ggplot`
+### I don't see the result of my code.
 
--   Sintaxis incorrecta:
+This can happen for several reasons:
 
-    1.  Usar `++` en lugar de `+` para concatenar funciones.
+-   If you save the result using the assignment symbol (e.g., `name <- "Laura"`), it will appear in the global environment (upper right section) and will not be executed in the console unless you call the object, that is,
 
-    2.  También puede ocurrir que el `+` queda en la línea de abajo, es importante destacar que para concatenar funciones debe estar al terminar la línea anterior a la que se quiere concadenar.
+    1.  put the object name in the console and execute it (pressing `Enter`).
+
+    2.  or in the script or RMarkdown Chunk, press `Control + Enter` on Windows or `Command + Enter` on Mac.
+
+-   Some necessary library is missing. Check that all the necessary libraries are loaded at the beginning of the script.
+
+-   There are errors in the code. Verify that there are no errors that prevent the code from executing correctly. When you run the code in the console, you will see some error alerts that the code may have.
+
+-   The script has not been fully executed. Make sure to run the entire script so that all lines of code are executed in the correct order.
+
+-   The script has not been fully executed. Make sure to run the entire script so that all lines of code are executed in the correct order.
+
+### Common errors when using `ggplot`
+
+-   Incorrect syntax:
+
+    1.  Using `++` instead of `+` to concatenate functions.
+
+    2.  It can also happen that the `+` is on the next line; it is important to note that to concatenate functions, it must be at the end of the previous line to the one you want to concatenate.
 
 ![](fig/bpggplot.png)
 
--   No especificar estéticas (aesthetics):
+-   Not specifying aesthetics:
 
-    1.  No incluir `aes()`.
-    2.  No definir `aes()` correctamente, por ejemplo, no indicar x o y.
-    3.  Si bien aes en algunos casos puede ir en la parte inicial, la geometría o estar dividido en secciones, es fundamental que siempre este presente.
+    1.  Not including `aes()`.
+    2.  Not defining `aes()` correctly, for example, not indicating x or y.
+    3.  While aes can sometimes be at the beginning, the geometry, or divided into sections, it is essential that it is always present.
 
--   Datos no presentes:
+-   Missing data:
 
-La columna mencionada en aes() no existe en el conjunto de datos. Usar el nombre incorrecto, recuerde que R es sensible a mayúsculas y minúsculas por los tanto `VariableX` es diferente a `variableX` o a `variablex`.
+The column mentioned in aes() does not exist in the dataset. Using the wrong name, remember that R is case-sensitive, so `VariableX` is different from `variableX` or `variablex`.
 
--   Falta de librerías:
+-   Missing libraries:
 
-Antes de trabajar con `ggplot` siempre recuerde cargar la librería con `library`:
+Before working with `ggplot`, always remember to load the library with `library`:
 
 ```{r eval = FALSE}
 library(ggplot2)
 ```
 
--   Errores en `geom`:
+-   Errors in `geom`:
 
 ```         
-Seleccionar la geom incorrecta para el tipo de datos que se desea representar.
+Selecting the wrong geom for the type of data you want to represent.
 
-### `filter` no funciona
+### `filter` does not work
 
-Esto puede ocurrir por varios motivos:
+This can happen for several reasons:
 ```
 
--   El paquete `dplyr` no está cargada. Aseguresé de incluir `library(dplyr)` o `library(tidyverse)` en su script, y ejecutarlo cada nueva sesión.
+-   The `dplyr` package is not loaded. Make sure to include `library(dplyr)` or `library(tidyverse)` in your script and run it in each new session.
 
--   Hay conflictos de nombres de funciones con otros paquetes. Use `dplyr::filter()` para especificar qué quiere utilizar la función `filter` de `dplyr`.
+-   There are function name conflicts with other packages. Use `dplyr::filter()` to specify that you want to use the `filter` function from `dplyr`.
 
--   Los datos pueden no estar en el formato esperado. Verifique que la columna que está filtrando existe y tiene los valores adecuados.
+-   The data may not be in the expected format. Verify that the column you are filtering exists and has the appropriate values.
 
-`filter` acepta condiciones lógicas para seleccionar filas. Veamos unos ejemplos:
+`filter` accepts logical conditions to select rows. Let's see some examples:
 
--          Valores específicos:
+-          Specific values:
 
 ```{r eval = FALSE}
-covid19 %>% filter(estado == "Fallecido")
+covid19 %>% filter(status == "Deceased")
 ```
 
--          Rangos de valores:
+-          Value ranges:
 
 ```{r eval = FALSE}
-covid19 %>% filter(fecha_de_notificacion >= "2020-01-01" & fecha_de_notificacion <= "2020-12-31")
+covid19 %>% filter(notification_date >= "2020-01-01" & notification_date <= "2020-12-31")
 ```
 
--          Condiciones múltiples:
+-          Multiple conditions:
 
 ```{r eval = FALSE}
-covid19 %>% filter(estado == "Fallecido" & nombre_del_pais == "Colombia")
+covid19 %>% filter(status == "Deceased" & country_name == "Colombia")
 ```
 
--          Condiciones con funciones:
+-          Conditions with functions:
 
 ```{r eval = FALSE}
-covid19 %>% filter(grepl("Colombia", nombre_del_pais))
+covid19 %>% filter(grepl("Colombia", country_name))
 ```
 
-Para saber más sobre filter consulte la [documentación](https://dplyr.tidyverse.org/reference/filter.html).
+To learn more about filter, check the [documentation](https://dplyr.tidyverse.org/reference/filter.html).
 
-### ¿Dónde está el objeto que cree?
+### Where is the object I created?
 
-Cuando se crea un objeto este se almacena en el ambiente global. Podemos ver el ambiente global en la interfaz de R ubicado en la parte superior lateral derecha.
+When an object is created, it is stored in the global environment. We can see the global environment in the R interface located in the upper right section.
 
-### No funciona el pipe `%>%`
+### The pipe `%>%` does not work.
 
-Recuerde los siguientes puntos: 
+Remember the following points: 
 
-- Es importante cargar previamente una librería que contenga el pipe. Por ejemplo: `magrittr`, `dplyr`, `tidyr` o `purrr`. 
-- El pipe debe ir al final de la línea que se va a conectar. No al inicio de la línea conectada:
+- It is important to load a library that contains the pipe beforehand. For example: `magrittr`, `dplyr`, `tidyr`, or `purrr`. 
+- The pipe must be at the end of the line to be connected. Not at the beginning of the connected line:
 
 ![](fig/bp_pipe.png)
 
 
 
-### ¿Cómo evitar accidentes? {#prevencion}
+### How to avoid accidents? {#prevention}
 
-Cuando se va a almacenar cambios en el objeto donde esta almacenado el dataframe, es recomendable tener algunas precauciones para evitar perder información:
+When storing changes in the object where the dataframe is stored, it is advisable to take some precautions to avoid losing information:
 
--   Crear un respaldo de los datos en objetos:
+-   Create a backup of the data in objects:
 
-o   Hacer copias de seguridad regularmente durante el proceso. Se recomienda hacer una copia inicial para evitar cargar la base de nuevo. Tras hacer algunos procesos, en especial, aquellos que consumen tiempo se recomienda crear respaldos. Puede crear tanto como considere convenientes. Se recomienda crear notas para identificar cada proceso
+o   Make regular backups during the process. It is recommended to make an initial copy to avoid reloading the base. After performing some processes, especially those that take time, it is advisable to create backups. You can create as many as you deem necessary. It is recommended to create notes to identify each process.
 
 ![](fig/bpaccidentes.png)
 
--   Crear un respaldo de los datos en archivos:
+-   Create a backup of the data in files:
 
-o   Al igual que guardar en objetos, es buena idea guardar los datos que ya han pasado algunos procesos en el disco del computador. Esto evita que si se bloquea la sesión o se apaga el computador los datos procesados estén resguardados. Cada cuanto se deben almacenar depende de quién realiza el procesamiento.
+o   Just like saving in objects, it is a good idea to save the data that has already undergone some processes on the computer's disk. This prevents data loss if the session crashes or the computer shuts down. How often to save depends on the person performing the processing.
 
 ![](fig/bpaccidentes1.png)
 
--   Pruebas antes de almacenar:
+-   Tests before storing:
 
-o   Realizar pruebas de los cambios deseados antes de guardarlos definitivamente.
+o   Perform tests of the desired changes before saving them definitively.
 
-o   Ejemplo: Si se quiere transformar una variable a numérica, antes de almacernarla y terminar teniendo `NAs` no deseados en los datos, es recomendable hacer una prueba antes de si se originaran esos `NAs`
+o   Example: If you want to transform a variable to numeric, before storing it and ending up with unwanted `NAs` in the data, it is advisable to test if those `NAs` will be generated.
 
 ![](fig/bpaccidentes2.png)
 
--   Crear variables de respaldo:
+-   Create backup variables:
 
-o   Algunas veces cuando vamos a transformar una variable es mejor crear una nueva que almacene el contenido de la transformación. Esto evita el riesgo de pérdida de información al transformar una variable.
+o   Sometimes when transforming a variable, it is better to create a new one that stores the content of the transformation. This avoids the risk of losing information when transforming a variable.
 
 ![](fig/bpaccidentes3.png)
 
--   Cuidado al almacenar:
+-   Be careful when storing:
 
-o   No almacenar tablas u objetos transformados accidentalmente.
+o   Do not accidentally store transformed tables or objects.
 
-o   Ej. si creamos una tabla para ver si la variable cambio como se deseaba y luego reutilizamos el código y añadimos la asignación adelante, almacenaríamos la tabla y perderíamos la información que tenía el objeto
+o   For example, if we create a table to see if the variable changed as desired and then reuse the code and add the assignment in front, we would store the table and lose the information that the object had.
 
 ![](fig/bpaccidentes4.png)
 
-### Mi dataframe cambió inesperadamente
+### My dataframe changed unexpectedly.
 
-Cuando tenemos accidentes con nuestros datos algunas opciones son:
+When we have accidents with our data, some options are:
 
--          Revisar cual es el daño y ver si es reparable. Por ejemplo, se cambió el carácter incorrecto en una cadena de texto.
+-          Check the damage and see if it is repairable. For example, if the wrong character was changed in a text string.
 
--          Cargar los datos a partir de un respaldo. Si hemos creado respaldos del proceso podemos evitarnos tiempos largo de procesamiento. Entre estos respaldos están las variables de respaldo o los objetos de respaldo (ver [¿Cómo evitar accidentes?](Banco_errores.Rmd#prevencion)).
+-          Load the data from a backup. If we have created backups of the process, we can avoid long processing times. These backups include backup variables or backup objects (see [How to avoid accidents?](Banco_errores.Rmd#prevention)).
 
-### Uso de la función `rename`
+### Using the `rename` function.
 
-1.      Llame la base de datos
+1.      Call the dataset.
 
 ```{r eval = FALSE}
-datos
+data
 ```
 
-2.      Use el pipe`%>%` para enlazarlo a la función rename
+2.      Use the pipe `%>%` to link it to the `rename` function.
 
-3.      Llame la función `rename` y escriba primero el nuevo nombre de la columna y después el nombre de la columna preexistente a la que quiere cambiar el nombre
+3.      Call the `rename` function and write the new column name first, followed by the existing column name you want to change.
 
 ```{r eval = FALSE}
-datos <- datos %>% rename(nombrenuevo = nombreantiguo)
+data <- data %>% rename(newname = oldname)
 ```
 
-n.      Seleccionar algunas filas de un grupo de datos
+n.      Select some rows from a group of data.
 
-1.      Llame la base de datos
+1.      Call the dataset.
 
 ```{r eval = FALSE}
-datos
+data
 ```
 
-2.      Use el pipe `%>%` para enlazarlo a la función `group_by`
+2.      Use the pipe `%>%` to link it to the `group_by` function.
 
 ```{r eval = FALSE}
-datos %>% group_by(variable_grupo)
+data %>% group_by(group_variable)
 ```
 
-La función `group_by` creará grupos de datos según una variable determinada en los cuales puede realizar otras acciones como por ejemplo seleccionar los datos en el encabezado de cada grupo.
+The `group_by` function will create groups of data based on a specified variable, allowing you to perform other actions such as selecting the data in the header of each group.
 
-4.      Enseguida use la función como en este ejemplo podríamos usar `head` solo para los datos del encabezado de cada grupo.
+4.      Then use the function, for example, we could use `head` only for the data in the header of each group.
 
 ```{r eval = FALSE}
-datos <- datos %>% group_by(variabledeinteres) %>% head()
+data <- data %>% group_by(variable_of_interest) %>% head()
 ```
 
-### ¿Cómo usar `summarise`?
+### How to use `summarise`?
 
-1.      Llame la base de datos
+1.      Call the dataset.
 
 ```{r eval = FALSE}
-datos
+data
 ```
 
-2.      Use el pipe`%>%`para enlazarlo a la función `summarise`
+2.      Use the pipe `%>%` to link it to the `summarise` function.
 
 ```{r eval = FALSE}
-datos %>% summarise()
+data %>% summarise()
 ```
 
-La función summarise no puede utilizarse de forma directa, por lo tanto, debe usarse junto a un argumento adentro, por ejemplo:
+The `summarise` function cannot be used directly; therefore, it must be used with an argument inside, for example:
 
-a.      Obtener el promedio
+a.      Get the average.
 
 ```{r eval = FALSE}
-datos %>% 
-  summarise(mean = mean(variabledeinteres))
+data %>% 
+  summarise(mean = mean(variable_of_interest))
 ```
 
-b.      Obtener la desviación estandar
+b.      Get the standard deviation.
 
 ```{r eval = FALSE}
-datos %>% 
-  summarise(sd = sd(variabledeinteres))
+data %>% 
+  summarise(sd = sd(variable_of_interest))
 ```
 
-Esta función puede usarse con agrupación previa (`group_by`) para obtener estos valores por cada grupo, por ejemplo,
+This function can be used with prior grouping (`group_by`) to obtain these values for each group, for example,
 
 ```{r eval = FALSE}
-datos %>%  group_by(pais) %>% 
+data %>%  group_by(country) %>% 
   summarise(
-    mean = mean(variabledeinteres), 
-    sd = sd(variabledeinteres))
+    mean = mean(variable_of_interest), 
+    sd = sd(variable_of_interest))
 ```
 
-### Errores relacionados a grupos (group_by y ungroup)
+### Errors related to groups (group_by and ungroup)
   
-- Un error muy frecuente es que se almacena el objeto agrupado (`group_by`), dado que no se realizó la acción de desagrupar al final. Esto puede generar errores como cálculos incorrectos, resúmenes por grupo en lugar de sobre la totalidad de los datos, y problemas al realizar operaciones subsecuentes en el conjunto de datos.  Por ello, recomendamos siempre emplear (`ungroup`) antes de almacenar. Para usar `ungroup()` basta con ponerlo al final.
+- A very common error is that the object is stored grouped (`group_by`), given that the ungrouping action was not performed at the end. This can generate errors such as incorrect calculations, summaries by group instead of on the entire dataset, and problems when performing subsequent operations on the dataset. Therefore, we recommend always using (`ungroup`) before storing. To use `ungroup()`, simply put it at the end.
 
 ```{r eval=FALSE}
-datos <- datos %>% 
-  group_by(categoria) %>% 
-  procesamiento_de_datos(...) %>% 
+data <- data %>% 
+  group_by(category) %>% 
+  data_processing(...) %>% 
   ungroup() 
 ```
   
-Veamos un ejemplo de un error que puede ocurrir por no desagrupar:
+Let's see an example of an error that can occur due to not ungrouping:
  
 ```{r,warning=FALSE,message=FALSE}
 library("tidyverse")
-set.seed(123) # Para reproducibilidad
-#dataframe de ejemplo
-tipo_sanguineo <- c("A", "B", "O","AB")
+set.seed(123) # For reproducibility
+#example dataframe
+blood_type <- c("A", "B", "O","AB")
 rh <- sample(c("+", "-"), 10, replace = TRUE)
-dia <-c(1:5)
-f_latidos <- sample(60:100, 200, replace = TRUE)
-f_respiratoria <- sample(12:20, 200, replace = TRUE)
-df <- data.frame(tipo_sanguineo, rh, dia, f_latidos, f_respiratoria)
+day <-c(1:5)
+heart_rate <- sample(60:100, 200, replace = TRUE)
+respiratory_rate <- sample(12:20, 200, replace = TRUE)
+df <- data.frame(blood_type, rh, day, heart_rate, respiratory_rate)
 
-#resumen por columnas
-por_dia <- df %>%
-  group_by(tipo_sanguineo,rh, dia) %>%
+#summary by columns
+by_day <- df %>%
+  group_by(blood_type,rh, day) %>%
   summarize(
-    f_l = mean(f_latidos), 
-    f_r = mean(f_respiratoria)
+    hr = mean(heart_rate), 
+    rr = mean(respiratory_rate)
   )
 ```
 
-Creemos una variable que contenga id únicos por cada fila
+Let's create a variable that contains unique ids for each row.
 
 ```{r}
-por_dia %>% mutate(id = row_number())
+by_day %>% mutate(id = row_number())
 ```
 
-Cómo puede observar en la columna id en lugar de identificadores únicos tenemos id que se repiten. ¿Por qué sucedió si cada fila es diferente?
+As you can see in the id column, instead of unique identifiers, we have repeating ids. Why did this happen if each row is different?
   
-La razón a este problema subyace en que los datos siguen agrupados. Aún si no aplicamos directamente el `ungroup` como se explico antes, todavía podemos solucionarlo.
+The reason for this problem lies in the fact that the data is still grouped. Even if we don't directly apply `ungroup` as explained before, we can still fix it.
 
-Veamos como no se solucionaría primero. Un error frecuente al tratar de solucionar este problema es aplicar la función ungroup sin almacenar el resultado.
+Let's see how it wouldn't be fixed first. A common mistake when trying to fix this problem is to apply the ungroup function without storing the result.
 ```{r}
-# aplicación equivocada de ungroup
-por_dia %>% ungroup() 
+# incorrect application of ungroup
+by_day %>% ungroup() 
 
-# si bien desagrupa el objeto para imprimirlo, 
-# mientras no se almacene  el objeto serguirá agrupado
-por_dia %>% mutate(id = row_number())
+# although it ungroups the object for printing, 
+# as long as it is not stored, the object will remain grouped
+by_day %>% mutate(id = row_number())
 ```
-Como puede observar el problema no se ha corregido.
+As you can see, the problem has not been fixed.
 
-Para conrregirlo podemos o incluir el `ungroup` desde el inicio cuando creamos el objeto `por_dia`, o aplicar el cambio y guardarlo en el objeto: 
+To fix it, we can either include `ungroup` from the beginning when creating the `by_day` object or apply the change and save it in the object: 
 
 ```{r}
-#ahora estamos almacenando el desagrupamiento
-por_dia_sin_grupo <- por_dia %>% ungroup()
+# now we are storing the ungrouping
+by_day_ungrouped <- by_day %>% ungroup()
 
-por_dia_sin_grupo %>% mutate(id = row_number())
+by_day_ungrouped %>% mutate(id = row_number())
 ```
-Como puede observar ahora si tenemos cada fila con su propio id.
+As you can see, now we have each row with its own id.
 
 
-Advertencia: Es importante aclarar que el desagrupamiento en los escenarios anteriores iría después de la operación, sin embargo, en este caso iría antes de la operación.
+Warning: It is important to clarify that ungrouping in the previous scenarios would go after the operation; however, in this case, it would go before the operation.
     
     
 
-### Cuando trato de crear un pdf en RMarkdown me sale error
+### When I try to create a PDF in RMarkdown, I get an error.
 
-Si el archivo sale correctamente en otros formatos a excepción de pdf. Una de las situaciones más frecuentes es que falte la instalación de LaTeX: RMarkdown necesita LaTeX para generar PDFs. Asegúrate de tener LaTeX instalado en tu sistema. 
+If the file is generated correctly in other formats except for PDF, one of the most common situations is that LaTeX is not installed: RMarkdown needs LaTeX to generate PDFs. Make sure you have LaTeX installed on your system. 
 
-Para instalar LaTeX desde RStudio, puede usar el paquete TinyTeX:
+To install LaTeX from RStudio, you can use the TinyTeX package:
 
 ```{r eval = FALSE}
 install.packages("tinytex")
@@ -443,28 +443,28 @@ tinytex::install_tinytex()
 
 Configure RStudio:
 
-Vaya a Tools > Global Options > Sweave.
+Go to Tools > Global Options > Sweave.
 
-Asegúrese de que la opción "Typeset PDF" esté configurada para usar TinyTeX. 
+Make sure the "Typeset PDF" option is set to use TinyTeX. 
  
 
-### Material adicional que puede aportar a su aprendizaje:
+### Additional material that can contribute to your learning:
 
-**Manejo de datos con Tidyverse y R:**
+**Data management with Tidyverse and R:**
 
 <https://www.youtube.com/watch?v=6STcQVX8Hk0>
 
 ::: keypoints
 
-Si después de buscar en esta guía sus preguntas no encontro respuesta por favor diligencie el siguiente formulario [Dudas por resolver](https://forms.office.com/pages/responsepage.aspx?id=Dpn32j-KnECbdipUdQmAAMjWJqHZ8P1DkQQdb07M30RUOEY5N1U1UDFYMExGMzFHRkRKT1BTRTFRWS4u&route=shorturl&sid=6a94f23c-049c-4f54-9732-fc25789059b3){.uri}
+If after searching this guide, you did not find an answer to your questions, please fill out the following form [Unresolved Questions](https://forms.office.com/pages/responsepage.aspx?id=Dpn32j-KnECbdipUdQmAAMjWJqHZ8P1DkQQdb07M30RUOEY5N1U1UDFYMExGMzFHRkRKT1BTRTFRWS4u&route=shorturl&sid=6a94f23c-049c-4f54-9732-fc25789059b3){.uri}
 :::
 
-## Contribuciones
+## Contributions
 
--   José M. Velasco-España: Versión inicial
+-   José M. Velasco-España: Initial version
 
--   Andree Valle-Campos: Ediciones menores
+-   Andree Valle-Campos: Minor edits
 
--   Laura Gómez-Bermeo: Ediciones menores
+-   Laura Gómez-Bermeo: Minor edits
 
--   Geraldine Gomez: Ediciones menores
+-   Geraldine Gomez: Minor edits
