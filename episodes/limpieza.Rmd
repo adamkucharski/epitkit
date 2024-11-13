@@ -1,5 +1,5 @@
 ---
-title: "Limpieza de datos epidemiológicos "
+title: "Cleaning Epidemiological Data"
 authors: [""]
 date: '2024-07-31'
 output:
@@ -18,112 +18,91 @@ editor_options:
 
 ::: questions
 
-- ¿Cómo limpiar datos epidemiológicos con R?
+- How to clean epidemiological data with R?
 
 :::
 
 ::: objectives
 
-Al final de este taller usted podrá:
+At the end of this workshop you will be able to:
 
-- Reconocer las herramientas que facilitan la limpieza de datos
-    epidemiológicos.
+- Recognize the tools that facilitate the cleaning of epidemiological data.
 
-- Identificar las buenas prácticas de la limpieza de datos
-    epidemiológicos.
+- Identify good practices for cleaning epidemiological data.
 
-- Explorar el proceso de limpieza, organización y caracterización de
-    datos epidemiológicos.
+- Explore the process of cleaning, organizing, and characterizing epidemiological data.
 :::
 
 ::: prereq
-Esta unidad tiene como prerequisitos:
+This unit has the following prerequisites:
 
--   Introducción a R y RStudio
+-   Introduction to R and RStudio
 :::
 
 
 ::: checklist
 
-### **Tabla de contenido**
+### **Table of Contents**
 
--   Módulo: Ciencia de datos en salud pública 
-    - Unidad: Limpieza de datos epidemiológicos
-        -   Tema 1: Introducción a la limpieza de datos (Ver en plataforma
-        del curso)
-        -   Tema 2: Exploración y caracterización de los datos
-        -   Tema 3: Modificación, limpieza y corrección de los datos:
-        Errores frecuentes y sus soluciones
-        -   Tema 4: Organización de los datos
+-   Module: Data Science in Public Health 
+    - Unit: Cleaning Epidemiological Data
+        -   Topic 1: Introduction to Data Cleaning (See on course platform)
+        -   Topic 2: Exploration and Characterization of Data
+        -   Topic 3: Modification, Cleaning, and Correction of Data: Common Errors and Their Solutions
+        -   Topic 4: Data Organization
     
 :::
 
-## Introducción
+## Introduction
 
-En esta unidad abordaremos el proceso de limpieza de datos
-epidemiológicos, utilizando los conocimientos previos de la unidad de la
-introducción a R y RStudio, abordaremos la limpieza de datos como un
-proceso fundamental para obtener insumos idóneos para el análisis de los
-datos, la visualización y la creación de reportes epidemiológicos.
+In this unit, we will address the process of cleaning epidemiological data, using the previous knowledge from the Introduction to R and RStudio unit. We will approach data cleaning as a fundamental process to obtain suitable inputs for data analysis, visualization, and the creation of epidemiological reports.
 
-En esta unidad, aprenderá a reconocer las actividades necesarias para
-llevar a cabo el proceso de limpieza de datos, aprenderá cómo solucionar
-los errores más comunes en las bases de datos que pueden afectar el
-análisis y comprenderá cómo describir y organizar los datos, clasificar
-variables, aplicar formatos a las variables, manejar datos duplicados y
-abordar la ausencia de datos.
+In this unit, you will learn to recognize the necessary activities to carry out the data cleaning process, how to solve the most common errors in databases that can affect analysis, and understand how to describe and organize data, classify variables, apply formats to variables, handle duplicate data, and address missing data.
 
-## **Tema 2: Exploración y caracterización de los datos**
+## **Topic 2: Exploration and Characterization of Data**
 
-### **2.2. Exploración de la estructura de los datos en R**
+### **2.2. Exploring the Structure of Data in R**
 
-Una vez hecha la exploración y la caracterización de los datos mediante
-la documentación se procederá a explorar el dataset.
+Once the exploration and characterization of the data through documentation is done, we will proceed to explore the dataset.
 
-#### **2.2.1. Carga de la información**
+#### **2.2.1. Loading the Information**
 
 ::: checklist
 
-### ⚠️ **Instrucciones:**
+### ⚠️ **Instructions:**
 
-Antes de empezar a trabajar verifique que ya cuenta con los siguientes
-pasos:
+Before starting to work, make sure you have completed the following steps:
 
-1.  Cree un proyecto en R
+1.  Create a project in R
 
-2.  Cree carpeta llamada "datos" dentro del proyecto
+2.  Create a folder called "data" within the project
 
-3.  Descargue el archivo data_limpieza.zip que contiene el dataset
-    "covid_LA.csv" y el documento de información "covid_LA_info.txt",
-    disponible en el siguiente enlace
+3.  Download the file data_limpieza.zip that contains the dataset "covid_LA.csv" and the information document "covid_LA_info.txt", available at the following link
     <https://github.com/TRACE-LAC/TRACE-LAC-data/raw/main/data_limpieza.zip> 
 
-4.  Descomprima los archivos y guarde el dataset "covid_LA.csv" en la
-    carpeta "datos"
+4.  Unzip the files and save the dataset "covid_LA.csv" in the "data" folder
 
-5.  Cree un R script
+5.  Create an R script
 :::
 
 ::: callout
-Si tiene dudas con el proceso por favor regrese a la unidad de
-**Introducción a R**.
+If you have any questions about the process, please return to the **Introduction to R** unit.
 :::
 
-**Resultado esperado:** Hasta este punto, el proyecto se debería ver
-así:
+**Expected result:** Up to this point, the project should look like this:
 
 ![](fig/vista_proyecto.png)
 
-6.  Cargue las librerías: tidyverse, rio y cleanepi.
+6.  Load the libraries: tidyverse, rio, and cleanepi.
 
 ::: callout
 
-Si aún no las ha instalado puede hacerlo con el siguiente código
+If you haven't installed them yet, you can do so with the following code
 
 ```{r eval = FALSE}
-if(!require("tidyverse")) install.packages("tidyverse") #si necesita instalar tidyverse
-if(!require("cleanepi")) install.packages("cleanepi") #si necesita instalar cleanepi
-if(!require("rio")) install.packages("rio") #si necesita instalar rio
+if(!require("tidyverse")) install.packages("tidyverse") #if you need to install tidyverse
+if(!require("cleanepi")) install.packages("cleanepi") #if you need to install cleanepi
+if(!require("rio")) install.packages("rio") #if you need to install rio
 ```
 
 :::
@@ -134,8 +113,7 @@ library("cleanepi")
 library("rio")
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 library("tidyverse")
@@ -143,102 +121,84 @@ library("cleanepi")
 library("rio")
 ```
 
-7.  Cargue el dataset
+7.  Load the dataset
 
-⚠️ **Instrucción:** Cargue el dataset en R con el siguiente código:
+⚠️ **Instruction:** Load the dataset in R with the following code:
 
 ```{r eval=FALSE}
-covid <- rio::import("datos/covid_LA.csv")
+covid <- rio::import("data/covid_LA.csv")
 ```
 
 ```{r echo = FALSE}
 covid <- rio::import("data/covid_LA.csv")
 ```
 
-Ahora que la base está cargada podemos hacer la revisión del formato de
-los datos.
+Now that the dataset is loaded, we can review the data format.
 
-#### **2.2.2. Exploración del dataset**
+#### **2.2.2. Exploring the Dataset**
 
-En este ejercicio para explorar las variables contenidas en el objeto
-covid se puede realizar una aproximación general o específica a cada
-variable.
+In this exercise, to explore the variables contained in the covid object, you can make a general or specific approach to each variable.
 
-Por ejemplo, puede hacer una aproximación general usando la función str
-para identificar el tipo de objeto, tipo de variables y valores de la
-variable. Una opción dentro de tidyverse la función glimpse que permite
-identificar rápidamente el contenido del dataset.
+For example, you can make a general approach using the str function to identify the type of object, type of variables, and values of the variable. An option within tidyverse is the glimpse function, which allows you to quickly identify the content of the dataset.
 
-⚠️ **Instrucción:** Emplee la función `glimpse` o `str`
+⚠️ **Instruction:** Use the `glimpse` or `str` function
 
 ```{r eval = FALSE}
 covid %>%
   dplyr::glimpse()
 ```
 
-**Resultado esperado :** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>%
   dplyr::glimpse()
 ```
 
-#### **2.2.3. Aplicación de buenas prácticas para nombrar variables**
+#### **2.2.3. Applying Best Practices for Naming Variables**
 
 ::: callout
-**Tip de buena práctica:** De acuerdo con las buenas prácticas de
-programación se recomienda que los nombres de las variables tengan
-características como:
+**Best Practice Tip:** According to programming best practices, it is recommended that variable names have characteristics such as:
 
--   Estar en minúsculas
+-   Be in lowercase
 
--   No contener caracteres especiales
+-   Do not contain special characters
 
--   No contener espacios
+-   Do not contain spaces
 :::
 
-Estas recomendaciones dependen de la preferencia del analista y su
-equipo. Para este módulo vamos a hacer uso de la función
-`standardize_column_names` del paquete `cleanepi`.
+These recommendations depend on the preference of the analyst and their team. For this module, we will use the `standardize_column_names` function from the `cleanepi` package.
 
 ::: callout
-La función `standardize_column_names` tiene como argumento principal:
+The `standardize_column_names` function has the main argument:
 
--   `data`: el dataset (o linelist) con los datos a modificar.
+-   `data`: the dataset (or linelist) with the data to be modified.
 
-Y dos argumentos opcionales:
+And two optional arguments:
 
--   `keep`: un vector con los nombres de las columnas que se mantendrán.
+-   `keep`: a vector with the names of the columns to be kept.
 
--   `rename`: un vector con los nombres de las columnas que se
-    renombraran. Ej.
-    `c(nombre_nuevo1 = “nombre_viejo1”, nombre_nuevo2 = “nombre_viejo2”)`
+-   `rename`: a vector with the names of the columns to be renamed. E.g.
+    `c(new_name1 = “old_name1”, new_name2 = “old_name2”)`
 :::
 
-⚠️ **Instrucción:** Emplee la función standardize_column_names para
-limpiar los nombres del dataset covid:
+⚠️ **Instruction:** Use the `standardize_column_names` function to clean the names of the covid dataset:
 
 ```{r}
 covid <- covid %>% 
   cleanepi::standardize_column_names()
 ```
 
-**Resultado esperado:** El código anterior no arroja un resultado
-visible en la consola para observar el cambio, sin embargo, empleando la
-función glimpse podemos observar los nombres de las variables de la base
-covid ajustados.
+**Expected result:** The above code does not produce a visible result in the console to observe the change, but by using the glimpse function, we can see the adjusted variable names in the covid dataset.
 
-⚠️ **Instrucción:** Emplee la función glimpse y observe el cambio en el
-nombre de la variable Tipo de recuperación:
+⚠️ **Instruction:** Use the glimpse function and observe the change in the variable name Tipo de recuperación:
 
 ```{r eval=FALSE}
 covid %>% 
   dplyr::glimpse()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
@@ -246,21 +206,18 @@ covid %>%
 ```
 
 
-#### **2.2.4. Resumen de variables**
+#### **2.2.4. Summary of Variables**
 
-Para empezar la exploración de las variables, emplearemos la función
-summary.
+To start exploring the variables, we will use the summary function.
 
-⚠️️ **Instrucción:** Emplee la función summary para explorar las
-variables:
+⚠️️ **Instruction:** Use the summary function to explore the variables:
 
 ```{r eval = FALSE}
 covid %>%
   base::summary()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo = FALSE}
 covid %>%
@@ -268,17 +225,12 @@ covid %>%
 ```
 
 ::: callout
-Para conocer las unidades de las variables recuerde ver la documentación
-llamada "covid_LA_info.txt".
+To know the units of the variables, remember to check the documentation called "covid_LA_info.txt".
 :::
 
-Además de poder usar `summary` como en el caso anterior, también se
-puede obtener esta información para cada variable de forma individual.
-Por ejemplo, para la variable `edad`, empleamos `summary` llamando a la
-variable dentro del dataset.
+In addition to using `summary` as in the previous case, you can also obtain this information for each variable individually. For example, for the `edad` variable, we use `summary` by calling the variable within the dataset.
 
-⚠️️ **Instrucción:** Emplee la función summary para explorar la variable
-edad:
+⚠️️ **Instruction:** Use the summary function to explore the `edad` variable:
 
 ```{r eval = FALSE}
 covid %>%
@@ -286,8 +238,7 @@ covid %>%
   base::summary()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo = FALSE}
 covid %>%
@@ -295,34 +246,27 @@ covid %>%
   base::summary()
 ```
 
-#### **2.2.5. Exploración de variables cuantitativas**
+#### **2.2.5. Exploring Quantitative Variables**
 
-Otra forma de explorar variables cuantitativas es en forma de gráfica.
-Empleando gráficos como histogramas, diagrama de cajas y bigotes, líneas
-de tendencia, nubes de puntos, diagrama de violines, entre otros. A
-continuación, se muestran ejemplos para histograma y diagrama de cajas y
-bigotes.
+Another way to explore quantitative variables is in the form of a graph. Using graphs such as histograms, box plots, trend lines, scatter plots, violin plots, among others. Below are examples for histograms and box plots.
 
-⚠️ **Instrucción:** Emplee la función hist para generar un histograma de
-la variable `edad`:
+⚠️ **Instruction:** Use the hist function to generate a histogram of the `edad` variable:
 
 ```{r eval=FALSE}
 covid %>% 
-  dplyr::pull(edad) %>% #pull extrae el vector
+  dplyr::pull(edad) %>% #pull extracts the vector
   graphics::hist()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
-  dplyr::pull(edad) %>% #pull extrae el vector
+  dplyr::pull(edad) %>% #pull extracts the vector
   graphics::hist()
 ```
 
-⚠️ **Instrucción:** Emplee la función boxplot para generar un boxplot de
-la variable `edad`:
+⚠️ **Instruction:** Use the boxplot function to generate a boxplot of the `edad` variable:
 
 ```{r eval=FALSE}
 covid %>% 
@@ -330,8 +274,7 @@ covid %>%
   graphics::boxplot()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
@@ -339,24 +282,17 @@ covid %>%
   graphics::boxplot()
 ```
 
-Estos gráficos pueden resultar útiles para examinar la tendencia y
-distribución de los datos, así como observar datos atípicos.
+These graphs can be useful for examining the trend and distribution of the data, as well as observing outliers.
 
 ::: callout
-Para explorar más temas de visualización por favor diríjase a la
-**Unidad. Introducción a la visualización de datos en R con ggplot2**.
+To explore more topics on visualization, please refer to the **Unit: Introduction to Data Visualization in R with ggplot2**.
 :::
 
-#### **2.2.6. Exploración de variables cualitativas**
+#### **2.2.6. Exploring Qualitative Variables**
 
-Ahondemos un poco más en la exploración de variables cualitativas.
-Cuando usamos `summary`, al inicio de esta sección, pudimos ver que
-sucedía con algunas variables cualitativas. Ahora observaremos lo que
-pasa con la variable `nombre_del_pais`.
+Let's delve a little deeper into exploring qualitative variables. When we used `summary` at the beginning of this section, we could see what happened with some qualitative variables. Now let's see what happens with the `nombre_del_pais` variable.
 
-⚠️ **Instrucción:** Seleccione la variable nombre_del_pais empleando la
-función select y emplee la función summary para ver el resumen de esta
-variable.
+⚠️ **Instruction:** Select the `nombre_del_pais` variable using the select function and use the summary function to see the summary of this variable.
 
 ```{r eval=FALSE}
 covid %>% 
@@ -364,8 +300,7 @@ covid %>%
   base::summary()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
@@ -373,16 +308,13 @@ covid %>%
   base::summary()
 ```
 
-::: discusión
-¿Qué puede observar?
+::: discussion
+What can you observe?
 :::
 
-Para obtener detalles sobre las categorías de las variables, podemos
-usar otras opciones como tablas, tablas de proporciones, extracción de
-valores únicos y creación de gráficos. Veamos cada uno:
+To obtain details about the categories of the variables, we can use other options such as tables, proportion tables, extracting unique values, and creating graphs. Let's see each one:
 
-⚠️ **Instrucción:** Emplee la función table para generar una tabla de la
-variable sintomas :
+⚠️ **Instruction:** Use the table function to generate a table of the `sintomas` variable:
 
 ```{r eval=FALSE}
 covid %>% 
@@ -390,8 +322,7 @@ covid %>%
   base::table()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-debió obtener los siguientes resultados:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
@@ -399,40 +330,33 @@ covid %>%
   base::table()
 ```
 
-::: discusión
-¿Qué puede observar?
+::: discussion
+What can you observe?
 :::
 
-En caso que deseemos observar una tabla con los **porcentajes** de cada
-elemento al interior de la variable podemos recurrir a la función
-`prop.table`.
+If we want to see a table with the **percentages** of each element within the variable, we can use the `prop.table` function.
 
-⚠️ **Instrucción:** Emplee la función `prop.table` para generar una
-tabla con porcentajes de la variable `sintomas`:
+⚠️ **Instruction:** Use the `prop.table` function to generate a table with percentages of the `sintomas` variable:
 
 ```{r eval = FALSE}
 covid %>%
   dplyr::pull(sintomas) %>%
   base::table() %>%
-  base::prop.table()*100 #si desea las propociones puede eliminar el "*100"
+  base::prop.table()*100 #if you want proportions, you can remove the "*100"
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo = FALSE}
 covid %>%
   dplyr::pull(sintomas) %>%
   base::table() %>%
-  base::prop.table()*100 #si desea las propociones puede eliminar el "*100"
+  base::prop.table()*100 #if you want proportions, you can remove the "*100"
 ```
 
-Como puede observar ahora podemos ver cada categoría con su respectivo
-porcentaje. En caso de que sólo deseemos ver los objetos contenidos sin
-otros datos podemos emplear la función `unique`.
+As you can see, now we can see each category with its respective percentage. If we only want to see the unique values without other data, we can use the `unique` function.
 
-⚠️ **Instrucción:** Emplee la función unique para extraer los valores
-únicos de la variable sintomas:
+⚠️ **Instruction:** Use the unique function to extract the unique values of the `sintomas` variable:
 
 ```{r eval=FALSE}
 covid %>%
@@ -440,8 +364,7 @@ covid %>%
   base::unique()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>%
@@ -449,13 +372,9 @@ covid %>%
   base::unique()
 ```
 
-Con esto pudimos obtener los diferentes valores de la variable
-`sintomas`. Además, las variables cualitativas pueden ser examinadas
-mediante gráficos de barras o de torta.
+With this, we were able to obtain the different values of the `sintomas` variable. Additionally, qualitative variables can be examined using bar or pie charts.
 
-⚠️ **Instrucción:** Emplee la función barplot a compañado de la función
-tablepara generar un gráfico de barras del contenido de la variable
-`sexo`:
+⚠️ **Instruction:** Use the barplot function accompanied by the table function to generate a bar chart of the content of the `sexo` variable:
 
 ```{r eval=FALSE}
 covid %>%
@@ -464,8 +383,7 @@ covid %>%
   graphics::barplot()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>%
@@ -478,27 +396,21 @@ covid %>%
 [![](fig/dudas.png){width="100"}](https://epiverse-trace.github.io/epitkit/Banco_errores.html)  
   
 </center>
-## **Tema 3: Modificación, limpieza y corrección de los datos: Errores frecuentes y sus soluciones**
+## **Topic 3: Modification, Cleaning, and Correction of Data: Common Errors and Their Solutions**
 
-### **3.1. Revisión de la coherencia del contenido de las variables.**
+### **3.1. Reviewing the Consistency of Variable Content**
 
-Para emplear estas funciones de conversión podemos emplearlas
-directamente a cada variable (ej. `as.factor(covid$sexo)`) o hacer uso
-de la función `across`. La función `across` es una función del paquete
-`dplyr` que permite aplicar transformaciones a múltiples variables de un
-data frame de manera simultánea. 
+To use these conversion functions, we can apply them directly to each variable (e.g., `as.factor(covid$sexo)`) or use the `across` function. The `across` function is a function from the `dplyr` package that allows applying transformations to multiple variables in a data frame simultaneously. 
 
 ::: callout
-La función `across` tiene dos argumentos
+The `across` function has two arguments
 
-1.  `.cols`: el vector de variables a transformar.
+1.  `.cols`: the vector of variables to transform.
 
-2.  `.fns`: la función que se aplicará.
+2.  `.fns`: the function to be applied.
 :::
 
-⚠️ **Instrucción:** Convierta las variables `sexo`, `sintomas` y
-`nombre_del_pais` a tipo factor con las funciones `across` y
-`as.factor`.
+⚠️ **Instruction:** Convert the `sexo`, `sintomas`, and `nombre_del_pais` variables to factor type using the `across` and `as.factor` functions.
 
 ```{r}
 covid <- covid %>% 
@@ -508,11 +420,9 @@ covid <- covid %>%
     .fns = as.factor))
 ```
 
-**Resultado esperado:** Se puede observar el resultado del código
-anterior empleando funciones de visualización como summary.
+**Expected result:** You can see the result of the above code using visualization functions like summary.
 
-⚠️ **Instrucción:** Emplee la función summary para explorar las
-variables transformadas a tipo factor:
+⚠️ **Instruction:** Use the summary function to explore the variables transformed to factor type:
 
 ```{r eval=FALSE}
 covid %>% 
@@ -520,8 +430,7 @@ covid %>%
   base::summary()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
@@ -530,25 +439,18 @@ covid %>%
 
 ```
 
-Al utilizar la función summary con las variables que acabamos de
-convertir en tipo factor, podemos observar que a diferencia de la
-primera vez que usamos summary en el paso 4 del tema 2 los resultados
-han cambiado.
+When using the summary function with the variables we just converted to factor type, we can see that the results have changed compared to the first time we used summary in step 4 of topic 2.
 
 ::: discussion
-¿Qué cambios puede observar?
+What changes can you observe?
 :::
 
-Para dar un orden a las categorías de una variable factor podemos usar
-la función `fct_relevel`.
+To give order to the categories of a factor variable, we can use the `fct_relevel` function.
 
-⚠️ **Instrucción:** Emplee la función `fct_relevel` para modificar el
-orden de las categorías de la variable:
+⚠️ **Instruction:** Use the `fct_relevel` function to modify the order of the categories of the variable:
 
 ::: callout
-**Pista**: En el primer argumento llamamos la variable a modificar y en
-el segundo argumento ponemos un vector con los niveles en el orden
-deseado.
+**Hint**: In the first argument, call the variable to be modified, and in the second argument, put a vector with the levels in the desired order.
 :::
 
 ```{r}
@@ -560,39 +462,27 @@ covid <- covid %>%
                                        "Grave", "Critico"))
 ```
 
-⚠️ **Instrucción:** Verifique si los niveles de la variable están en el
-orden deseado:
+⚠️ **Instruction:** Check if the levels of the variable are in the desired order:
 
 ```{r eval=FALSE}
 covid %>% 
   dplyr::count(sintomas)
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
   dplyr::count(sintomas)
 ```
 
-Tener en orden los niveles de las variables es fundamental para un
-adecuado análisis estadístico y una correcta interpretación de los
-resultados.
+Having the levels of the variables in order is essential for proper statistical analysis and correct interpretation of the results.
 
-Sin embargo, aunque la documentación especifique que la variable debe
-tener un tipo de dato determinado. Por ejemplo, para variables
-numéricas, a veces un dataset podría contener los números escritos en
-letras. En este caso, al realizar la conversión a tipo numérico el
-sistema no los detectará como valores numéricos y los reemplazará por
-valores `NA`, lo que resultará en la pérdida de esa información. Veamos
-un ejemplo.
+However, although the documentation specifies that the variable should have a certain data type, for example, for numeric variables, sometimes a dataset may contain numbers written in letters. In this case, when converting to numeric type, the system will not detect them as numeric values and will replace them with `NA` values, resulting in the loss of that information. Let's see an example.
 
-⚠️ **Instrucciones:**
+⚠️ **Instructions:**
 
-1.  Usando la función table explore los primeros 1000 registros
-    contenidos de la variable `num_hos_rec` ¿Qué elementos puede
-    observar?
+1.  Using the table function, explore the first 1000 records contained in the `num_hos_rec` variable. What elements can you observe?
 
 ```{r eval=FALSE}
 covid %>%
@@ -601,8 +491,7 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>%
@@ -611,12 +500,9 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-Esta variable contiene elementos numéricos, caracteres y `NA` para
-convertir la variable a numérica se emplea la función `as.numeric`.
+This variable contains numeric elements, characters, and `NA`. To convert the variable to numeric, use the `as.numeric` function.
 
-2.  Antes de convertir el dataset, usando la función `as.numeric`
-    obtenga una tabla de la columna en formato numérico que le permita
-    explorar las consecuencias de convertirla a numérica.
+2.  Before converting the dataset, using the `as.numeric` function, obtain a table of the column in numeric format to explore the consequences of converting it to numeric.
 
 ```{r eval=FALSE}
 covid %>% 
@@ -626,8 +512,7 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>% 
@@ -637,15 +522,11 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-::: discusión
-¿Qué cambios pudo observar?
+::: discussion
+What changes could you observe?
 :::
 
-Al explorar la variable en formato numérico notamos que los números
-permanecen mientras que los elementos no numéricos ("no registra" y "No
-registra") se unieron al grupo de `NA`. Más adelante profundizaremos en
-los datos `NA`. Si esta conforme con los cambios, puede convertir el
-dataset:
+When exploring the variable in numeric format, we notice that the numbers remain while the non-numeric elements ("no registra" and "No registra") joined the `NA` group. We will delve into `NA` data later. If you are satisfied with the changes, you can convert the dataset:
 
 ```{r}
 covid <- covid %>%
@@ -654,27 +535,19 @@ covid <- covid %>%
     lang = "es")
 ```
 
-### **3.2. Identificación de valores erróneos o faltantes.**
+### **3.2. Identifying Erroneous or Missing Values**
 
-Además de los valores NA en nuestro procesamiento de datos podemos
-encontrar otros valores Inf (valores infinitos) o NaN (valores numéricos
-indeterminados).
+In addition to NA values, in our data processing, we may encounter other values such as Inf (infinite values) or NaN (undefined numeric values).
 
-La identificación de datos faltantes requiere en primera instancia
-identificar la causa de la ausencia de estos datos.
+Identifying missing data requires first identifying the cause of the absence of these data.
 
-#### **3.2.1. Valores NA**
+#### **3.2.1. NA Values**
 
-##### **NAs relacionados con separadores incorrectos**
+##### **NAs Related to Incorrect Separators**
 
-Veamos un ejemplo común de aparición de `NA`: cuando tenemos diferentes
-separadores para números (ej. en talla).
+Let's see a common example of the appearance of `NA`: when we have different separators for numbers (e.g., in height).
 
-⚠️ **Instrucción:** Antes de convertir el dataset, obtenga una tabla
-(usando la función table) que cuantifique los NA resultantes de
-convertir la variable talla en formato numérico con la función
-as.numeric. Para comprobar si un valor es `NA` puede usar la función
-`is.na`.
+⚠️ **Instruction:** Before converting the dataset, obtain a table (using the table function) that quantifies the NAs resulting from converting the height variable to numeric format with the `as.numeric` function. To check if a value is `NA`, you can use the `is.na` function.
 
 ```{r}
 covid %>%
@@ -684,8 +557,7 @@ covid %>%
   base::table()
 ```
 
-Ahora use el siguiente código para comprender por qué se generan estos
-`NA`
+Now use the following code to understand why these `NAs` are generated
 
 ```{r}
 covid %>%
@@ -693,39 +565,21 @@ covid %>%
   utils::head()
 ```
 
-**Resultado esperado:** Como puede observar aparece una advertencia
-indicando que algunos de los valores han sido convertidos en valores
-`NA`. Esto se debe a que hay elementos no numéricos en la variable. Al
-explorar el contenido de la variable podemos notar que la talla está
-como un vector de caracteres y los separadores incluyen puntos, comas,
-espacios, etc, pero en este caso es un sólo separador en todos los
-casos.
+**Expected result:** As you can see, a warning appears indicating that some values have been converted to `NA`. This is because there are non-numeric elements in the variable. When exploring the content of the variable, we can notice that the height is in a character vector, and the separators include dots, commas, spaces, etc., but in this case, it is a single separator in all cases.
 
-Cuando trabajamos con una variable numérica, es fundamental conocer si
-su recolección y digitación se realizaron de manera estandarizada y
-limitada a valores numéricos. Para corregir errores como el uso de
-caracteres en lugar de números, podemos recurrir a funciones de búsqueda
-y reemplazo de caracteres dentro del contenido de la variable. Una
-opción es utilizar la función `str_replace` que se encuentra en el
-paquete `stringr` de R.
+When working with a numeric variable, it is essential to know if its collection and entry were done in a standardized manner and limited to numeric values. To correct errors such as using characters instead of numbers, we can use search and replace functions for characters within the variable's content. One option is to use the `str_replace` function from the `stringr` package in R.
 
 ::: callout
-La función `str_replace` requiere de tres argumentos:
+The `str_replace` function requires three arguments:
 
--   `string`: el vector de la variable que se modificará.
+-   `string`: the vector of the variable to be modified.
 
--   `pattern`: el carácter que se desea reemplazar. Sin embargo, por
-    practicidad podemos emplear expresiones regulares. Por ejemplo, la
-    expresión `"[^0-9]"` indica que se selecciona cualquier carácter que
-    no sea un número. . Se pone entre comillas.
+-   `pattern`: the character to be replaced. However, for convenience, we can use regular expressions. For example, the expression `"[^0-9]"` indicates that any character that is not a number is selected. It is enclosed in quotes.
 
--   `replacement`: el carácter que reemplazará al del primer argumento.
-    Se pone entre comillas.
+-   `replacement`: the character that will replace the one in the first argument. It is enclosed in quotes.
 :::
 
-⚠️ **Instrucción:** Utilice la función `str_replace` para reemplazar
-dentro de la variable talla (introducida como carácter) todos los
-elementos que no sean (\^) números del 0 al 9 o un punto: por un punto.
+⚠️ **Instruction:** Use the `str_replace` function to replace within the height variable (introduced as a character) all elements that are not (\^) numbers from 0 to 9 or a dot: with a dot.
 
 ```{r}
 covid <- covid %>%
@@ -733,11 +587,10 @@ covid <- covid %>%
                   stringr::str_replace(
                     string = talla, 
                     pattern= "[^0-9.]",
-                    replacement=".")
-                )
+                    replacement="."))
 ```
 
-⚠️ **Instrucción:** Verifique si se realizo el cambio deseado:
+⚠️ **Instruction:** Check if the desired change was made:
 
 ```{r}
 covid %>%
@@ -745,11 +598,7 @@ covid %>%
   utils::head()
 ```
 
-⚠️ **Instrucción:** Compruebe el efecto de la transformación y usando la
-función table obtenga una tabla que cuantifique los NA resultante de
-convertir la variable talla en formato numérico con la función
-`as.numeric`. Para comprobar si un dato es NA puede usar la función
-`is.na`.
+⚠️ **Instruction:** Check the effect of the transformation and use the table function to obtain a table that quantifies the NAs resulting from converting the height variable to numeric format with the `as.numeric` function. To check if a value is NA, you can use the `is.na` function.
 
 ```{r}
 covid %>%
@@ -759,12 +608,9 @@ covid %>%
   base::table()
 ```
 
-**Resultado esperado:** Si el cambio de decimales fue exitoso con el
-dataset y que en caso de reemplazarlo por numérico no tendría NAs. Por
-lo tanto está bien hacer el cambio a numérico.
+**Expected result:** If the decimal change was successful with the dataset and if replacing it with numeric would not result in NAs. Therefore, it is okay to change it to numeric.
 
-⚠️ **Instrucción:** Transforme la variable talla a formato numérico e
-imprima las primeras filas.
+⚠️ **Instruction:** Transform the height variable to numeric format and print the first rows.
 
 ```{r}
 covid <- covid %>%
@@ -775,41 +621,27 @@ covid %>%
   utils::head()
 ```
 
-Como podemos ver, una vez hecha la transformación ya no aparecen
-comillas "", indicando que ya se hizo la conversión a numéricos.
+As we can see, once the transformation is done, the quotes "" no longer appear, indicating that the conversion to numeric has been made.
 
-##### **NAs relacionados con errores en la escritura de fechas**
+##### **NAs Related to Errors in Date Writing**
 
-En algunas ocasiones puede ocurrir que la escritura de fechas sigue el
-criterio de quién recolecta los datos. Por ejemplo, en un formulario que
-contiene día/mes/año podemos encontrar diligenciamientos como:
-"2015-03-15", "15-03-15", "2015-mar-15", "01/mar/2023", "15/15/03",
-"ene/15". Dado que corregir una innumerable cantidad de fechas puede ser
-una tarea inviable, la función standardize_dates del paquete `cleanepi`
-ofrece una alternativa para hacer corrección automática, además de
-convertir la columna al formato fecha (`date`).
+Sometimes, date writing follows the criteria of the data collector. For example, in a form that contains day/month/year, we may find entries like: "2015-03-15", "15-03-15", "2015-mar-15", "01/mar/2023", "15/15/03", "ene/15". Since correcting numerous dates can be an unfeasible task, the `standardize_dates` function from the `cleanepi` package offers an alternative for automatic correction, as well as converting the column to date format (`date`).
 
 ::: callout
-La función `standardize_dates` además del argumento data tiene un
-argumento principal que es:
+The `standardize_dates` function, in addition to the data argument, has a main argument:
 
--   `target_columns`: las columnas que contienen las fechas que se van a
-    estandarizar.
+-   `target_columns`: the columns that contain the dates to be standardized.
 
-Y tres argumentos opcionales:
+And three optional arguments:
 
--   `error_tolerance`: el porcentaje permitido de fechas que no se
-    pueden corregir antes de que se detenga la función.
+-   `error_tolerance`: the allowed percentage of dates that cannot be corrected before the function stops.
 
--   `format`: el formato de las fechas. Si se deja como NULL, la función
-    intentará adivinar el formato. 
+-   `format`: the format of the dates. If left as NULL, the function will try to guess the format. 
 
--   `timeframe`: el rango de fechas permitido. Si se deja como NULL, la
-    función no restringirá las fechas. 
+-   `timeframe`: the allowed date range. If left as NULL, the function will not restrict the dates. 
 :::
 
-⚠️ **Instrucción:** Observe cómo está compuesta la variable
-`fecha_reporte_web`.
+⚠️ **Instruction:** Observe how the `fecha_reporte_web` variable is composed.
 
 ```{r}
 covid %>%
@@ -817,30 +649,20 @@ covid %>%
   dplyr::slice(1:10)
 ```
 
-Como puede observar las fechas se presentan en varios formatos, además
-como se vio cuando usamos glimpse la columna está en formato carácter.
-Para estandarizar estos formatos de fechas y dar formato fecha a la
-variable emplearemos la función `standarize_dates`. 
+As you can see, the dates are presented in various formats, and as seen when we used glimpse, the column is in character format. To standardize these date formats and convert the variable to date format, we will use the `standardize_dates` function. 
 
-⚠️ **Instrucción:** Convierta la variable `fecha_reporte_web` a tipo
-fecha usando la función `standardize_dates`.
+⚠️ **Instruction:** Convert the `fecha_reporte_web` variable to date type using the `standardize_dates` function.
 
 ```{r}
 covid %>%
   dplyr::select(fecha_reporte_web) %>%
   dplyr::slice(1:10) %>%
   cleanepi::standardize_dates() 
-
-
 ```
 
-Como puede observar, dado que no especificamos el formato, la función lo
-identificó de forma automática. En los casos en que la identificación
-falló, los datos fueron transformados a `NA`.  Además, ahora la columna
-está en formato fecha (`date`).
+As you can see, since we did not specify the format, the function identified it automatically. In cases where the identification failed, the data was transformed to `NA`.  Additionally, now the column is in date format (`date`).
 
-⚠️ **Instrucción:** Almacene el cambio en la variable
-`fecha_reporte_web`
+⚠️ **Instruction:** Store the change in the `fecha_reporte_web` variable
 
 ```{r}
 covid <- covid %>%
@@ -848,15 +670,11 @@ covid <- covid %>%
     target_columns = "fecha_reporte_web")
 ```
 
-##### **NAs relacionados con errores en la escritura de números**
+##### **NAs Related to Errors in Number Writing**
 
-En algunos casos pueden ocurrir errores en la recolección que no se
-corrigen en la digitación como, por ejemplo, escribir el nombre de un
-número (ej. "tres") en lugar del símbolo que representa al número (ej.
-"3").
+In some cases, errors in data collection may not be corrected during data entry, such as writing the name of a number (e.g., "three") instead of the symbol representing the number (e.g., "3").
 
-⚠️ **Instrucción:** Usando la función table explore la variable
-`num_hos_rec`
+⚠️ **Instruction:** Using the table function, explore the `num_hos_rec` variable
 
 ```{r}
 covid %>%
@@ -864,28 +682,21 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-Como puede observar hay números escritos como letras y en símbolos, así
-como dos categorías de datos que no se registraron y no hay `NA` es
-decir que todos los registros cuentan con algún valor.
+As you can see, there are numbers written as letters and symbols, as well as two categories of data that were not recorded, and there are no `NA`, meaning that all records have some value.
 
-Para corregir estos errores luego de identificarlos podemos sustituirlos
-uno por uno con `gsub` o podemos aprovechar la función
-`convert_to_numeric` del paquete cleanepi.
+To correct these errors after identifying them, we can replace them one by one with `gsub` or use the `convert_to_numeric` function from the cleanepi package.
 
 ::: callout
-La función `convert_to_numeric` tiene 3 argumentos:
+The `convert_to_numeric` function has 3 arguments:
 
--   `data`: el dataset (o linelist) con los datos a modificar.
+-   `data`: the dataset (or linelist) with the data to be modified.
 
--   `target_colum`: el vector que contiene los nombres de la(s)
-    columna(s) a modificar.
+-   `target_colum`: the vector that contains the names of the column(s) to be modified.
 
--   `lang`: El idioma en el que están los números lang = c("en", "fr",
-    "es").
+-   `lang`: The language in which the numbers are written lang = c("en", "fr", "es").
 :::
 
-⚠️ **Instrucción:** Usando la función `convert_to_numeric` corrija los
-errores de la variable `num_hos_rec`
+⚠️ **Instruction:** Using the `convert_to_numeric` function, correct the errors in the `num_hos_rec` variable
 
 ```{r}
 covid <- covid %>%
@@ -894,8 +705,7 @@ covid <- covid %>%
     lang = "es")
 ```
 
-⚠️ **Instrucción:** Usando la función table compruebe el cambio en la
-variable `num_hos_rec`
+⚠️ **Instruction:** Using the table function, check the change in the `num_hos_rec` variable
 
 ```{r}
 covid %>%
@@ -903,17 +713,13 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-Como puede observar los números en letras fueron convertidos a sus
-respectivos equivalentes numéricos. Mientras que todo elemento no
-reconocido como número fue convertido en `NA`.
+As you can see, the numbers in letters were converted to their respective numeric equivalents. While any element not recognized as a number was converted to `NA`.
 
-##### **NAs relacionados con dos datos en la misma columna**
+##### **NAs Related to Two Data Points in the Same Column**
 
-En algunos casos un dataset puede contener dos variables en una misma
-columna.
+In some cases, a dataset may contain two variables in the same column.
 
-⚠️ **Instrucción:** Explore las primeras filas de la variable
-`tension_arterial`.
+⚠️ **Instruction:** Explore the first rows of the `tension_arterial` variable.
 
 ```{r}
 covid %>%
@@ -921,29 +727,21 @@ covid %>%
   utils::head()
 ```
 
-**Resultado esperado:** En consistencia con lo mencionado en la
-documentación del dataset "covid_LA_info.txt", la variable
-tension_arterial contiene dos datos en una misma columna (tensión
-sistólica y tensión diastólica separada por "/").
+**Expected result:** Consistent with what is mentioned in the dataset documentation "covid_LA_info.txt", the `tension_arterial` variable contains two data points in the same column (systolic blood pressure and diastolic blood pressure separated by "/").
 
-Para solucionar este problema podemos utilizar la función
-`separate_wider_delim` de la librería `tidyr` dentro del conjunto de
-librerías de `tidyverse`.
+To solve this problem, we can use the `separate_wider_delim` function from the `tidyr` library within the `tidyverse` package.
 
 ::: callout
-La función `separate_wider_delim` además de data tiene tres argumentos
-principales.
+The `separate_wider_delim` function, in addition to data, has three main arguments.
 
--   `cols`: requiere el vector que contiene la columna de un data frame.
+-   `cols`: requires the vector that contains the column of a data frame.
 
--   `delim`: requiere el separador que se empleó para separar los datos.
+-   `delim`: requires the separator used to separate the data.
 
--   `names`: requiere el nombre de las columnas que se crearán.
+-   `names`: requires the names of the columns to be created.
 :::
 
-⚠️ **Instrucción:** Empleando la función `separate_wider_delim` separe
-la variable tension_arterial en dos variables: `tension_sistolica` y
-`tension_diastolica`.
+⚠️ **Instruction:** Using the `separate_wider_delim` function, separate the `tension_arterial` variable into two variables: `tension_sistolica` and `tension_diastolica`.
 
 ```{r}
 covid <- covid %>%
@@ -963,27 +761,15 @@ covid %>%
   utils::head()
 ```
 
-**Resultado esperado:** El código anterior genera los cambios
-directamente en el dataset `covid` y se obtienen las dos columnas
-nuevas.
+**Expected result:** The above code generates the changes directly in the `covid` dataset, and the two new columns are obtained.
 
-Es importante recordar que todos estos cambios dependen de las variables
-trabajadas y el analista de datos debe usar su criterio en cada
-circunstancia y hacer pruebas que le permitan revisar si los resultados
-son los esperados.
+It is important to remember that all these changes depend on the variables being worked on, and the data analyst must use their judgment in each circumstance and perform tests to ensure that the results are as expected.
 
-#### **3.2.2. Valores infinitos (`Inf`)**
+#### **3.2.2. Infinite Values (`Inf`)**
 
-Los valores infinitos pueden generarse cuando una operación resulta en
-un número demasiado grande (Inf+) o demasiado pequeño (Inf -) para R. En
-R si intentamos calcular valores superiores o iguales a 2\^1024 (más
-grande que el número de granos de arena en el planeta tierra) o cuando
-dividimos un número por valores muy cercanos a 0, específicamente
-menores de 1/1e-309, obtendremos Inf. En el caso de valores inferiores a
-1e-324 R los asume como 0:
+Infinite values can be generated when an operation results in a number too large (Inf+) or too small (Inf-) for R. In R, if we try to calculate values greater than or equal to 2\^1024 (larger than the number of grains of sand on Earth) or when dividing a number by values very close to 0, specifically less than 1/1e-309, we will get Inf. In the case of values less than 1e-324, R assumes them as 0:
 
-⚠️ **Instrucción:** Observe los resultados de las siguientes
-operaciones:
+⚠️ **Instruction:** Observe the results of the following operations:
 
 ```{r}
 2^1024
@@ -1001,11 +787,7 @@ operaciones:
 1/0
 ```
 
-La aparición de los valores `Inf` puede suceder en cualquier momento del
-manejo de datos, particularmente cuando hay una equivocación al realizar
-operaciones aritméticas. Por ejemplo, cuando se quería calcular los días
-de vida, y en lugar de usar el operador de multiplicación (\*) se usó el
-operador de potencia (\^).
+The appearance of `Inf` values can happen at any time during data handling, particularly when there is a mistake in performing arithmetic operations. For example, when trying to calculate the number of days lived, and instead of using the multiplication operator (\*), the power operator (\^) was used.
 
 ```{r}
 covid <- covid %>%
@@ -1016,15 +798,11 @@ covid %>%
   utils::head()
 ```
 
-#### **3.2.3. Valores indeterminados (`NaN`)**
+#### **3.2.3. Undefined Values (`NaN`)**
 
-Estos valores se generan cuando se realizan operaciones matemáticamente
-indefinidas. Por ejemplo, si intentamos dividir cero entre cero o restar
-o dividir un número infinito de otro número infinito, obtendremos `NaN`
-(que significa "No es un número"). A continuación se muestran unos
-ejemplos:
+These values are generated when performing mathematically undefined operations. For example, if we try to divide zero by zero or subtract or divide an infinite number by another infinite number, we will get `NaN` (which means "Not a Number"). Below are some examples:
 
-⚠️ **Instrucción:** Observe las siguientes operaciones
+⚠️ **Instruction:** Observe the following operations
 
 ```{r}
 Inf/Inf
@@ -1038,19 +816,13 @@ Inf-Inf
 0/0
 ```
 
-Aunque los resultados como `Inf` o `NaN` puedan parecer imposibles,
-estos pueden aparecer cuando en el proceso de conversión de variables
-cometemos un error o al crear una variable tras una operación errónea y
-el error se propaga en operaciones subsecuentes.
+Although results like `Inf` or `NaN` may seem impossible, they can appear when we make a mistake in converting variables or creating a variable after an erroneous operation, and the error propagates in subsequent operations.
 
-#### **3.2.4. Datos duplicados**
+#### **3.2.4. Duplicate Data**
 
-Otro error que puede ocurrir frecuentemente son los datos duplicados.
-Estos pueden ser tanto una observación de una variable duplicada o todo
-un registro duplicado.
+Another common error is duplicate data. These can be either a duplicate observation of a variable or an entire duplicate record.
 
-⚠️ **Instrucción:** Explore si en la variable `id_de_caso` se repiten
-valores
+⚠️ **Instruction:** Explore if values are repeated in the `id_de_caso` variable
 
 ```{r}
 covid %>%
@@ -1059,52 +831,38 @@ covid %>%
   base::table()
 ```
 
-Como puede observar al menos 1000 códigos de identificación se repiten
-en el dataset dos o tres veces. Pero en ese punto aún no sabemos si
-estos 1000 registros son errores o simplemente corresponden a dos
-registros diferentes de la misma persona (por ejemplo, reinfecciones).
+As you can see, at least 1000 identification codes are repeated in the dataset two or three times. But at this point, we still don't know if these 1000 records are errors or simply correspond to two different records of the same person (e.g., reinfections).
 
-Para identificar cuáles son registros (filas) totalmente duplicados en
-todas sus variables que sí son errores podemos usar la función
-duplicated y sumar los registros así:
+To identify which records (rows) are entirely duplicated in all their variables and are indeed errors, we can use the duplicated function and sum the records like this:
 
 ```{r}
 covid %>%
   base::duplicated() %>%
   base::sum()
-
 ```
 
-Para solucionar este problema podemos usar la función
-`remove_duplicates` de cleanepi el cual permite eliminar las filas que
-se repiten exactamente.
+To solve this problem, we can use the `remove_duplicates` function from cleanepi, which allows removing rows that are exactly duplicated.
 
 ::: callout
-La función `remove_duplicates` tiene como argumento principal:
+The `remove_duplicates` function has the main argument:
 
--   `data`: el dataset (o linelist) con los datos a modificar.
+-   `data`: the dataset (or linelist) with the data to be modified.
 
-Y un argumento opcional:
+And an optional argument:
 
--   `target_columns`: un vector con los nombres de las columnas que se
-    usaran para buscar los duplicados.
+-   `target_columns`: a vector with the names of the columns to be used to search for duplicates.
 :::
 
-⚠️ **Instrucción:** Empleando la función `remove_duplicates` elimine del
-dataset covid las filas repetidas.
+⚠️ **Instruction:** Using the `remove_duplicates` function, remove the duplicated rows from the covid dataset.
 
 ```{r}
 covid <- covid %>%
   cleanepi::remove_duplicates()
 ```
 
-Como puede ver en la salida la función detectó 2391 filas replicadas en
-su totalidad (pueden estar presentes dos veces o más). Si explora
-nuevamente el dataset `covid` podrá observar que 1196 filas
-desaparecieron. Además podrá observar que se genero una nueva columna en
-el dataset llamada `row_id`.
+As you can see in the output, the function detected 2391 entirely duplicated rows (they may be present two or more times). If you explore the `covid` dataset again, you will see that 1196 rows have disappeared. Additionally, you will see that a new column called `row_id` has been generated in the dataset.
 
-Ahora observemos qué efecto tuvo en los identificadores únicos.
+Now let's see the effect on unique identifiers.
 
 ```{r}
 covid %>%
@@ -1113,17 +871,11 @@ covid %>%
   base::table()
 ```
 
-De acuerdo con esta tabla, una vez removimos los registros duplicados,
-quedan 1005 identificadores de casos (`id_de_caso`) que se registran dos
-veces.
+According to this table, once we removed the duplicated records, there are 1005 case identifiers (`id_de_caso`) that are recorded twice.
 
-En caso de que se desee mantener únicamente con el primer registro de
-cada caso, se puede emplear la misma función `remove_duplicates` usando
-adicionalmente el argumento `target_columns` para especificar las
-columnas. Veamos un ejemplo.
+If you want to keep only the first record of each case, you can use the same `remove_duplicates` function with the additional `target_columns` argument to specify the columns. Let's see an example.
 
-️**Instrucción:** Empleando la función `remove_duplicates` elimine del
-dataset los datos correspondiente a "`id_de_caso`" repetidos.
+️**Instruction:** Using the `remove_duplicates` function, remove the duplicated `id_de_caso` data from the dataset.
 
 ```{r}
 covid <- covid %>%
@@ -1131,17 +883,11 @@ covid <- covid %>%
     target_columns = "id_de_caso")
 ```
 
-Como puede observar se encontraron 2010 `id_de_caso` replicados. Por lo
-que si se explora el dataset covid podrá observar que el efecto es la
-eliminación de 1005 filas. Note que el usuario debe estar seguro de
-querer remover esas filas, de lo contrario puede ejecutar la función sin
-sobrescribir el objeto para observar los resultados y cuando se este
-seguro almacenarlo.
+As you can see, 2010 duplicated `id_de_caso` were found. Therefore, if you explore the `covid` dataset, you will see that the effect is the removal of 1005 rows. Note that the user must be sure to remove these rows; otherwise, they can run the function without overwriting the object to observe the results and store it when sure.
 
-#### **3.2.5. Errores tipográficos**
+#### **3.2.5. Typographical Errors**
 
-A veces, podemos encontrar que las categorías de una variable se han
-escrito de múltiples maneras. Veamos un ejemplo:
+Sometimes, we may find that the categories of a variable have been written in multiple ways. Let's see an example:
 
 ```{r}
 covid %>%
@@ -1149,9 +895,7 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-Para corregir este error, podemos usar la función `gsub` para reemplazar
-el valor incorrecto "casa" por el valor que hemos seleccionado como
-correcto, "Casa".
+To correct this error, we can use the `gsub` function to replace the incorrect value "casa" with the value we have selected as correct, "Casa".
 
 ```{r}
 covid <- covid %>%
@@ -1161,7 +905,7 @@ covid <- covid %>%
                                         x= ubicacion_del_caso))
 ```
 
-Como resultado, los valores han sido reemplazados:
+As a result, the values have been replaced:
 
 ```{r}
 covid %>%
@@ -1175,30 +919,19 @@ covid %>%
   
 </center>
 
-#### **3.2.6. Reemplazar valores perdidos**
+#### **3.2.6. Replacing Missing Values**
 
-En algunas ocasiones los dataset contienen valores que no corresponden a
-las categorías de las variables, faltan o desde la documentación sabemos
-que esos valores corresponden a `NA`. Para garantizar un análisis
-robusto, es una buena práctica reemplazar todos esos valores por `NA`.
-Para hacer este reemplazo lo podemos hacer empleando la función
-`replace_missing_values` del paquete cleanepi.
+In some cases, datasets contain values that do not correspond to the categories of the variables, are missing, or from the documentation, we know that these values correspond to `NA`. To ensure robust analysis, it is a good practice to replace all these values with `NA`. To do this replacement, we can use the `replace_missing_values` function from the cleanepi package.
 
 ::: callout
-La función `replace_missing_values` además de data tiene argumentos
-opcionales:
+The `replace_missing_values` function, in addition to data, has optional arguments:
 
--   `na_strings`: el vector con los caracteres que representan los
-    valores perdidos (ej. "missing", "NA", "N A"). Si no se diligencia
-    este argumento se usaran los valores predefinidos en el vector
-    cleanepi::common_na_strings.
+-   `na_strings`: the vector with the characters that represent the missing values (e.g., "missing", "NA", "N A"). If this argument is not provided, the predefined values in the vector cleanepi::common_na_strings will be used.
 
--   `target_columns`: un vector con los nombres de las columnas en las
-    cuales se ejecutará la función.
+-   `target_columns`: a vector with the names of the columns in which the function will be executed.
 :::
 
-⚠️ **Instrucción:** Revise el contenido de la variable
-`ubicacion_del_caso`:
+⚠️ **Instruction:** Review the content of the `ubicacion_del_caso` variable:
 
 ```{r}
 covid %>% 
@@ -1206,16 +939,14 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-⚠️ **Instrucción**: Revise en la documentación que posibles NA pueden
-aparecer en el dataset y reemplacelos por NA.
+⚠️ **Instruction**: Review the documentation for possible NAs that may appear in the dataset and replace them with NA.
 
 ```{r}
 covid <- covid %>%
   cleanepi::replace_missing_values( na_strings = "N/A")
 ```
 
-**Instrucción:** Revise el contenido de la variable `ubicacion_del_caso`
-para ver los cambios:
+**Instruction:** Review the content of the `ubicacion_del_caso` variable to see the changes:
 
 ```{r}
 covid %>%
@@ -1223,55 +954,37 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-#### **3.2.7. Columnas con valores constantes**
+#### **3.2.7. Columns with Constant Values**
 
-En algunas ocasiones, es posible encontrar columnas que contienen un
-único valor. Esto puede ocurrir, por ejemplo, cuando se divide un
-dataset de mayor tamaño en una fracción más pequeña. En estos casos, la
-columna que servía para separar los datos se vuelve innecesaria. Para
-estos casos se puede emplear la función `remove_constants` del paquete
-cleanepi.
+In some cases, it is possible to find columns that contain only one value. This can happen, for example, when a larger dataset is divided into a smaller fraction. In these cases, the column that was used to separate the data becomes unnecessary. For these cases, we can use the `remove_constants` function from the cleanepi package.
 
 ::: callout
-La función `remove_constants` tiene como argumento principal:
+The `remove_constants` function has the main argument:
 
--   `data`: el dataset (o linelist) con los datos a modificar.
+-   `data`: the dataset (or linelist) with the data to be modified.
 :::
 
-⚠️ **Instrucción:** Empleando la función `remove_constants` remueva las
-filas que tengan valores constantes. 
+⚠️ **Instruction:** Using the `remove_constants` function, remove the rows with constant values. 
 
 ```{r}
 covid <- covid %>%
   cleanepi::remove_constants()
 ```
 
-Para verificar la cantidad de columnas que permanecen después del
-proceso, puede utilizar la función `ncol`:
+To verify the number of columns remaining after the process, you can use the `ncol` function:
 
 ```{r}
 covid %>%
   base::ncol()
 ```
 
-#### **3.2.8. Verificación de valores atípicos**
+#### **3.2.8. Verification of Outliers**
 
-Para evaluar si los datos se encuentran dentro de un rango esperado o si
-existen valores atípicos, se puede emplear la creación de gráficas o la
-exploración de la cabeza y cola de los datos cuando están ordenados; por
-ejemplo, en el caso de las fechas se pueden crear curvas históricas, o
-si son edades mediante histogramas o boxplot.
+To evaluate if the data is within an expected range or if there are outliers, we can use the creation of graphs or explore the head and tail of the data when sorted; for example, in the case of dates, we can create historical curves, or if they are ages, using histograms or box plots.
 
-La identificación de valores atípicos puede variar según el criterio del
-analista de datos y las características de la variable. Por ejemplo, en
-la variable edad si bien valores superiores a los 100 años son escasos
-biológicamente son viables, sin embargo, una edad de 200 años podría
-considerarse un valor atípico. En el caso de las variables de fecha, los
-valores atípicos pueden surgir cuando hay fechas que no siguen el
-comportamiento esperado. Veamos un ejemplo con fechas:
+Identifying outliers can vary depending on the data analyst's criteria and the characteristics of the variable. For example, in the age variable, while values above 100 years are rare, they are biologically viable; however, an age of 200 years could be considered an outlier. In the case of date variables, outliers can arise when there are dates that do not follow the expected behavior. Let's see an example with dates:
 
-⚠️ **Instrucción:** Antes de comenzar asegúrese que la variable este en
-formato fecha, para revisar puede emplear la función **`class`()**
+⚠️ **Instruction:** Before starting, make sure the variable is in date format. To check, you can use the **`class`()** function.
 
 ```{r}
 covid %>%
@@ -1279,12 +992,9 @@ covid %>%
   base::class()
 ```
 
-Si su variable no está en formato fecha (`date`), por favor, revise
-nuevamente la sección **NAs relacionados con errores en la escritura de
-fechas** y emplee la función ahí aprendida.
+If your variable is not in date format (`date`), please review the section **NAs Related to Errors in Date Writing** and use the function learned there.
 
-⚠️ **Instrucción:** Empleando la función `hist`, cree un histograma de
-las fechas en que fueron reportados los casos por semana.
+⚠️ **Instruction:** Using the `hist` function, create a histogram of the dates when cases were reported by week.
 
 ```{r eval = FALSE}
 covid %>%
@@ -1292,8 +1002,7 @@ covid %>%
   graphics::hist(breaks = "weeks")
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo = FALSE}
 covid %>%
@@ -1301,19 +1010,11 @@ covid %>%
   graphics::hist(breaks = "weeks")
 ```
 
-Como podemos observar la gráfica empieza desde 1969. Por razones
-epidemiológicas rápidamente analizamos que al tratarse de casos COVID
-esperaríamos que los registros empezaran desde 2020. Esto indica que
-puede haber una fecha que esté mal digitada dando como resultado el
-histograma anterior.
+As we can see, the graph starts from 1969. For epidemiological reasons, we quickly analyze that since these are COVID cases, we would expect the records to start from 2020. This indicates that there may be a date that is incorrectly entered, resulting in the above histogram.
 
-Para este caso podemos ordenar los datos con la función arrange del
-paquete dplyr dentro de tidyverse para ver las fechas ordenadas e
-identificar potenciales fechas erróneas al comienzo de la serie. Como se
-muestra en el ejemplo a continuación:
+In this case, we can sort the data using the arrange function from the dplyr package within tidyverse to see the ordered dates and identify potential erroneous dates at the beginning of the series. As shown in the example below:
 
-⚠️ **Instrucción:** Observe los datos que encabezan el dataset cuando
-está ordenada por fecha.
+⚠️ **Instruction:** Observe the data at the beginning of the dataset when sorted by date.
 
 ```{r eval=FALSE}
 covid %>%
@@ -1322,8 +1023,7 @@ covid %>%
   utils::head()
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r}
 covid %>%
@@ -1332,57 +1032,38 @@ covid %>%
   utils::head()
 ```
 
-En la primera fila tenemos el valor por fuera del rango esperado, es
-decir, una fecha de 1970. En este caso es un solo dato el que debemos
-corregir, sin embargo, podrían existir varios cientos de estos. Para
-corregir este tipo de errores se puede eliminar las filas que contienen
-estos datos o reasignar a estos valores con datos tipo NA para no perder
-la demás información.
+In the first row, we have the value outside the expected range, that is, a date of 1970. In this case, it is a single data point that we need to correct, but there could be several hundreds of these. To correct this type of error, we can remove the rows containing these data or reassign these values to NA to avoid losing other information.
 
-#### **3.2.9. Corrección de errores en fechas**
+#### **3.2.9. Correcting Errors in Dates**
 
-Una vez explorados los datos e identificados posibles errores, podemos
-explorar las medidas correctivas a utilizar. En este caso teniendo en
-cuenta que los primeros casos de COVID en latinoamérica fueron en
-febrero del 2020 emplearemos el primero de febrero (2020-02-01) como la
-fecha a partir de la cual consideraremos estos datos como válidos.
-Podemos definir la fecha de corte a partir del contexto epidemiológico,
-o la documentación.
+Once the data has been explored and potential errors identified, we can explore the corrective measures to be used. In this case, considering that the first COVID cases in Latin America were in February 2020, we will use February 1, 2020 (2020-02-01) as the date from which we will consider these data as valid. We can define the cutoff date based on the epidemiological context or documentation.
 
-⚠️ **Instrucción:** Filtre los datos por la fecha de reporte antes de la
-fecha "2020-02-01".
+⚠️ **Instruction:** Filter the data by the report date before the date "2020-02-01".
 
 ```{r eval=FALSE}
 covid %>%
   dplyr::filter(fecha_reporte_web < as.Date("2020-02-01"))
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
 ```{r echo=FALSE}
 covid %>%
   dplyr::filter(fecha_reporte_web < as.Date("2020-02-01"))
 ```
 
-Una vez identificados los datos, podemos corregirlos reemplazándolos por
-el valor correcto (si lo conocemos), convirtiéndolos en valores NA o
-excluyéndolos del análisis.
+Once the data is identified, we can correct it by replacing it with the correct value (if known), converting it to NA, or excluding it from the analysis.
 
-⚠️ **Instrucción:** Empleando la función filter excluya las fechas
-previas a la fecha "2020-02-01" en la variable fecha_reporte_web.
-Recuerde usar la expresión ! antes del nombre de la variable para lograr
-una selección inversa.
+⚠️ **Instruction:** Using the filter function, exclude the dates before "2020-02-01" in the `fecha_reporte_web` variable. Remember to use the expression ! before the variable name to achieve an inverse selection.
 
 ```{r}
 covid <- covid %>% 
   dplyr::filter(!fecha_reporte_web < as.Date("2020-02-01"))
 ```
 
-Ahora volvamos a producir la gráfica y observemos.
+Now let's reproduce the graph and observe.
 
-⚠️ **Instrucción:** Vuelva a producir el histograma con la corrección en
-las fechas.
+⚠️ **Instruction:** Reproduce the histogram with the correction in the dates.
 
 ```{r}
 covid %>%
@@ -1390,17 +1071,13 @@ covid %>%
   graphics::hist(breaks = "weeks")
 ```
 
-**Resultado esperado:** Al usar el anterior código con el mismo dataset
-se obtiene el siguiente resultado:
+**Expected result:** Using the above code with the same dataset, you get the following result:
 
-#### **3.2.10. Filtrado de registros con NA**
+#### **3.2.10. Filtering Records with NA**
 
-En ciertos análisis, puede ser necesario excluir los valores NA. Para
-lograr esto, podemos utilizar la función de filtrado proporcionada por
-`dplyr`. Esto nos permite centrarnos en los datos completos.
+In certain analyses, it may be necessary to exclude NA values. To achieve this, we can use the filtering function provided by `dplyr`. This allows us to focus on complete data.
 
-⚠️ **Instrucción:** Revise el contenido de la variable
-`ubicacion_del_caso`:
+⚠️ **Instruction:** Review the content of the `ubicacion_del_caso` variable:
 
 ```{r}
 covid %>%
@@ -1408,16 +1085,14 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-**Instrucción**: Filtre la variable `ubicacion_del_caso` para excluir
-los registros con `NA` presentes en esta variable:
+**Instruction**: Filter the `ubicacion_del_caso` variable to exclude records with `NA` present in this variable:
 
 ```{r}
 covid <- covid %>%
   dplyr::filter(!is.na(ubicacion_del_caso))
 ```
 
-**Instrucción:** Revise el contenido de la variable ubicacion_del_caso
-para ver los cambios:
+**Instruction:** Review the content of the `ubicacion_del_caso` variable to see the changes:
 
 ```{r}
 covid %>% 
@@ -1425,20 +1100,13 @@ covid %>%
   base::table(useNA = "always")
 ```
 
-Como puede observar ahora los NA son 0.
+As you can see, now the NAs are 0.
 
-#### **3.2.11. Reemplazo de siglas, abreviaturas o valores códigos**
+#### **3.2.11. Replacing Acronyms, Abbreviations, or Coded Values**
 
-En el proceso de la recopilación o entrada de datos, es común el uso de
-siglas, abreviaturas o códigos para registrar información. Por ejemplo,
-en el caso de la variable de sexo, a veces se puede emplear "1", "m" o
-"M" para representar el sexo masculino, y "2", "f" o "F" para el sexo
-femenino, entre otras opciones. Si se cuenta con un diccionario para la
-conversión de estos valores, es posible utilizar la función
-`clean_using_dictionary` de del paquete  `cleanepi` para realizar el
-reemplazo correspondiente.
+In the process of data collection or entry, it is common to use acronyms, abbreviations, or codes to record information. For example, in the case of the gender variable, sometimes "1", "m", or "M" may be used to represent male gender, and "2", "f", or "F" for female gender, among other options. If we have a dictionary for converting these values, we can use the `clean_using_dictionary` function from the `cleanepi` package to perform the replacement.
 
-Dado que de momento no tenemos un diccionario podemos crear uno.
+Since we don't have a dictionary at the moment, we can create one.
 
 ```{r}
 diccionario <- base::data.frame(
@@ -1449,7 +1117,7 @@ diccionario <- base::data.frame(
   orders = 1:6)
 ```
 
-⚠️ **Instrucción:** Revise el contenido de la variable `sexo`:
+⚠️ **Instruction:** Review the content of the `sexo` variable:
 
 ```{r}
 covid %>%
@@ -1458,27 +1126,21 @@ covid %>%
 ```
 
 ::: callout
-La función `clean_using_dictionary` tiene como argumento principal:
+The `clean_using_dictionary` function has the main argument:
 
--   `data`: el dataset (o linelist) con los datos a modificar.
+-   `data`: the dataset (or linelist) with the data to be modified.
 
--   `dictionary`: un diccionario que contiene los valores que se van a
-    reemplazar los datos actuales. Cada clave en el diccionario
-    representa un valor original en el conjunto de datos, y el valor
-    asociado a esa clave es el nuevo significado que se le asignará al
-    dato.
+-   `dictionary`: a dictionary that contains the values to be replaced in the current data. Each key in the dictionary represents an original value in the dataset, and the value associated with that key is the new meaning to be assigned to the data.
 :::
 
-⚠️ **Instrucción:** Aplique la función `clean_using_dictionary` al
-dataset:
+⚠️ **Instruction:** Apply the `clean_using_dictionary` function to the dataset:
 
 ```{r}
 covid <- cleanepi::clean_using_dictionary(covid,
                                           dictionary = diccionario)
 ```
 
-⚠️ **Instrucción:** Revise el contenido de la variable sexo para ver los
-cambios:
+⚠️ **Instruction:** Review the content of the `sexo` variable to see the changes:
 
 ```{r}
 covid %>%
@@ -1494,76 +1156,53 @@ covid %>%
 </center>
 
 
-## **Tema 4: Organización de los datos**
+## **Topic 4: Data Organization**
 
-Finalmente podemos realizar algunas actividades de organización de
-datos. Como, por ejemplo:
+Finally, we can perform some data organization activities. For example:
 
-### 4.1. Eliminación de variables repetidas o que no tengan utilidad en responder la pregunta de investigación
+### 4.1. Removing Duplicate or Unnecessary Variables
 
-Durante la exploración de datos es posible encontrar variables cuyo
-contenido no es necesario para el análisis o que ya no se requieren.
-Para optimizar el uso de recursos de memoria en el equipo, podemos
-eliminar estas variables. Para lograrlo podemos usar la función select
-del paquete tidyverse.
+During data exploration, it is possible to find variables whose content is not necessary for the analysis or that are no longer needed. To optimize memory usage on the computer, we can remove these variables. To achieve this, we can use the select function from the tidyverse package.
 
-⚠️ **Instrucción:** Empleando la función select acompañada del símbolo -
-elimine la variable edad_repetida.
+⚠️ **Instruction:** Using the select function accompanied by the - symbol, remove the `edad_repetida` variable.
 
 ```{r}
 covid <- covid %>%
   dplyr::select (!edad_repetida)
 ```
 
-### 4.2. Organización de las variables
+### 4.2. Organizing Variables
 
-Parte de la organización de las variables incluye asignar nombres
-apropiados a las variables, según la necesidad del proyecto. Esto se
-puede lograr mediante la función `rename` de `dplyr`.
+Part of organizing variables includes assigning appropriate names to the variables according to the project's needs. This can be achieved using the `rename` function from `dplyr`.
 
-⚠️ **Instrucción:** Empleando la función rename cambie el nombre de la
-variable `fecha_de_inicio_de_sintomas` a un nombre más corto como, por
-ejemplo: `inicio_sintomas`.
+⚠️ **Instruction:** Using the rename function, change the name of the `fecha_de_inicio_de_sintomas` variable to a shorter name, such as `inicio_sintomas`.
 
 ```{r}
 covid <- covid %>%
   dplyr::rename(inicio_sintomas = fecha_de_inicio_de_sintomas)
 ```
 
-¿A qué otras columnas les cambiaría el nombre?
+What other columns would you rename?
 
-### 4.3. Almacenamiento del dataset limpio
+### 4.3. Storing the Clean Dataset
 
-Una vez se haya terminado la modificación, limpieza y corrección de los
-datos podemos guardar el dataset limpio. Esto se debe a que, todos los
-cambios que han sido realizados se han guardado únicamente en la sesión
-de R, y se perderán una vez que esta se cierre. Para hacerlo, se puede
-utilizar la función export del paquete rio.
+Once the modification, cleaning, and correction of the data are completed, we can save the clean dataset. This is because all the changes made have been saved only in the R session and will be lost once it is closed. To do this, we can use the export function from the rio package.
 
 ::: callout
-La función `export` necesita mínimo dos argumentos:
+The `export` function requires at least two arguments:
 
-1.  x: El **nombre del objeto** que se guardará en el archivo.
+1.  x: The **name of the object** to be saved in the file.
 
-2.  file: El **nombre del archivo** con su extensión (ej.
-    datos_limpios_covid.RDS). Si se almacenará en una carpeta, se agrega
-    la ruta a la carpeta antes del nombre del archivo
-    (ej.datos/limpios/datos_limpios_covid.RDS).
+2.  file: The **name of the file** with its extension (e.g., datos_limpios_covid.RDS). If it will be stored in a folder, add the path to the folder before the file name (e.g., data/clean/datos_limpios_covid.RDS).
 :::
 
-⚠️ **Instrucción:** Cree un directorio de datos limpios y almacene los
-datos corregidos en el formato de su preferencia. Le recomendamos .RDS.
+⚠️ **Instruction:** Create a directory for clean data and save the corrected data in your preferred format. We recommend .RDS.
 
 ```{r eval=FALSE}
-rio::export(covid, "datos/limpios/datos_limpios_covid.RDS")# guarde los datos
+rio::export(covid, "data/clean/datos_limpios_covid.RDS")# save the data
 ```
 
-**Resultado esperado:** Para observar el resultado vaya a su carpeta
-datos y a la subcarpeta limpios. Ahí verá un archivo llamado
-datos_limpios_covid.RDS. También puede almacenar el archivo en formato
-.xls o .xlsx para Excel, así como en otros múltiples formatos. Sin
-embargo, se recomienda RDS por su bajo peso y capacidad de
-almacenamiento.
+**Expected result:** To see the result, go to your data folder and the clean subfolder. There you will see a file called datos_limpios_covid.RDS. You can also save the file in .xls or .xlsx format for Excel, as well as in many other formats. However, RDS is recommended for its low weight and storage capacity.
 
  <center>  
    
@@ -1573,27 +1212,24 @@ almacenamiento.
 
 ::: keypoints
 
-Revise si al final de esta lección adquirió estas competencias:
+Check if at the end of this lesson you have acquired these skills:
 
--   Reconocer las herramientas que facilitan la limpieza de datos
-    epidemiológicos.
+-   Recognize the tools that facilitate the cleaning of epidemiological data.
 
--   Identificar las buenas prácticas de la limpieza de datos
-    epidemiológicos.
+-   Identify good practices for cleaning epidemiological data.
 
--   Explorar el proceso de limpieza, organización y caracterización de
-    datos epidemiológicos.
+-   Explore the process of cleaning, organizing, and characterizing epidemiological data.
 
 :::
 
-### Contribuciones
+### Contributions
 
--   Zulma M. Cucunuba: Versión inicial
--   Laura Gómez-Bermeo: Edición
--   Geraldine Gomez: Ediciones menores
--   Andree Valle: Ediciones menores
--   José M. Velasco España: Ediciones menores
+-   Zulma M. Cucunuba: Initial version
+-   Laura Gómez-Bermeo: Editing
+-   Geraldine Gomez: Minor edits
+-   Andree Valle: Minor edits
+-   José M. Velasco España: Minor edits
 
-### Asuntos legales
+### Legal Issues
 
 **Copyright**: Zulma M. Cucunuba, 2019
